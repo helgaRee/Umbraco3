@@ -17,7 +17,9 @@
 </head>
 <body>
     <div class="wrapper">
-        <header></header>
+        <header>
+            @await Html.PartialAsync("partials/static/topbar.cshtml")
+        </header>
         <main>
             @RenderBody()
         </main>

@@ -1,0 +1,25 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    //hämta ut office location
+    var officeLocation = settings?.Value<string>("officeLocation") ?? "";
+    var logotype = settings?.Value<string>("logotype") ?? "";
+}
+
+<div class="topbar">
+    <div class="container">
+        <div class="content">
+            <div class="adress">           
+                <p>@officeLocation</p>
+            </div>
+            <div class="ext-links">
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+            </div>
+        </div>
+    </div>
+</div>
