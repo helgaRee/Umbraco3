@@ -6,7 +6,7 @@
     var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
     //hämta ut office location
     var officeLocation = settings?.Value<string>("officeLocation") ?? "";
-    var logotype = settings?.Value<string>("logotype") ?? "";
+    var siteLogotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
 }
 
 <div class="topbar">

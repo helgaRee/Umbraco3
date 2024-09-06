@@ -1,8 +1,18 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 @{
 	Layout = null;
-    var pageTitle= !string.IsNullOrEmpty(ViewBag.Title) ? $"{ViewBag.Title} | Onatrix - Financial Solutions" : $"Onatrix - Financial Solutions";
+
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var siteName = settings.Value<string>("siteName") ?? "Onatrix";
+    var siteTagline = settings.Value<string>("siteTagline") ?? "Financial Solutions";
+
+    var siteLogotype = settings.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
+    var siteThumbnail = settings.Value<IPublishedContent>("siteThumbnail").Url() ?? "";
+
+    var pageTitle= !string.IsNullOrEmpty(ViewBag.Title) ? $"{ViewBag.Title} | {siteName} - {siteTagline}" : $"{siteName} - {siteTagline}";
 }
 
 <!DOCTYPE html>
@@ -12,18 +22,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">  
-    <link rel="icon" href="images/logo-icon.svg" type="">
+    <link rel="icon" href="@siteThumbnail" type="">
     <title>@pageTitle</title>
 </head>
 <body>
     <div class="wrapper">
         <header>
             @await Html.PartialAsync("partials/static/topbar.cshtml")
+            @await Html.PartialAsync("partials/static/header.cshtml")
         </header>
         <main>
             @RenderBody()
         </main>
-        <footer></footer>
+        <footer>
+            @await Html.PartialAsync("partials/static/footer.cshtml")
+        </footer>
 	</div>
     <script src="/script/main.js"></script>
 </body>

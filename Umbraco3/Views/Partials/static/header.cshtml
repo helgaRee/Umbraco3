@@ -1,0 +1,33 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    //hämta root
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var siteName = settings?.Value<string>("siteName") ?? "";
+    var siteLogotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
+
+    var modular = rootContents.FirstOrDefault(x => x.ContentType.Alias == "modularPage") ?? null!;
+
+    
+}
+
+
+
+<div class="navbar">
+    <div class="logo">
+        <a href="#home"><img src="@siteLogotype" alt="@siteName"></a>
+    </div>
+    <ul class="links">
+        <li><a href="about">About</a></li>
+        <li><a href="services">Services</a></li>
+        <li><a href="projects">projects</a></li>
+        <li><a href="contact">contact</a></li>
+    </ul>
+    <a href="#" class="btn-search"><i class="fa-light fa-magnifying-glass"></i></a>
+
+    <button class="btn-menu"><i class="fa-regular fa-bars"></i></button>
+
+</div>

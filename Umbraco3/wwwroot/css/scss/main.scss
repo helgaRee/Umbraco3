@@ -1,0 +1,27 @@
+@import "./mixins/mixins.scss";
+@import "../colors/mixins/mixins_colors.scss";
+
+
+@import "./misc/base.scss";
+
+@import "../colors/components/colors.scss";
+@import "../colors/components/buttons.scss";
+@import "../colors/components/base.scss";
+@import "../colors/components/backgrounds.scss";
+@import "../colors/components/headings.scss";
+@import "../colors/components/links.scss";
+
+
+
+@import "components/wrapper.scss";
+@import "components/buttons.scss";
+@import "components/container.scss";
+@import "components/links.scss";
+@import "components/typography.scss";
+
+
+@import "../scss/sections/header.scss";
+@import "../scss/sections/hero.scss";
+@import "../scss/sections/aboutUs.scss";
+@import "../scss/sections/ourServices.scss";
+

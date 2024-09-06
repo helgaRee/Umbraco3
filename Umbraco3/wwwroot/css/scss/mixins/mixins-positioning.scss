@@ -1,0 +1,18 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin left {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+
+@mixin grid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+}

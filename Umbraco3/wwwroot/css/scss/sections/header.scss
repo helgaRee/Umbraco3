@@ -1,0 +1,166 @@
+
+header {
+    display: flex;
+    flex-direction: column;
+
+
+    .topbar {
+        background-color: var(--color-primary);
+        padding: 1rem;
+
+        .container {
+            margin-left: 0;
+
+            .content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .adress {
+                    display: none;
+
+                    @include tablet {
+                        display: contents;
+                    }
+
+                    p {
+                        color: white;
+                        padding: 0;
+                    }
+                }
+
+                .ext-links {
+                    display: flex;
+
+                    a {
+                        border-left: 1px solid var(--color-primary-light);
+                        border-right: 1px solid var(--color-primary-light);
+                        padding-inline: 0.6rem;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    .navbar {
+        width: 100%;
+        height: 60px;
+        max-width: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+
+        @include tablet {
+            margin: 0 auto;
+        }
+
+
+        .logo {
+
+
+            a {
+            }
+        }
+
+        .links {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            display: none;
+
+
+            @include tablet {
+                display: flex;
+            }
+
+            li {
+                list-style: none;
+            }
+
+            a {
+            }
+        }
+
+        .btn-search {
+
+            position: absolute;
+            top: -6px;
+            right: 0px;
+            padding: 0.6rem;
+
+            @include tablet {
+                position: relative;
+            }
+        }
+
+        .btn-menu {
+            display: block;
+
+            @include tablet {
+                display: none;
+            }
+        }
+    }
+
+    .top-navigation {
+        .container {
+
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 0;
+
+                .logo {
+                    align-self: baseline;
+                }
+
+                .menu-bar {
+                    display: block;
+                    cursor: pointer;
+                }
+
+                .navbar-list {
+                    // display: none;
+                    display: flex;
+                    flex-direction: column;
+                    list-style: none;
+                    //position: absolute;
+                    width: 100%;
+                    justify-content: center;
+
+                    .navlink {
+                    }
+                }
+            }
+        }
+        /* 
+            @include tablet {
+                .container {
+
+                    .navbar {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 15px 0;
+
+                        .logo {}
+
+                        .menu-bar {
+                            display: none;
+                        }
+
+                        .navbar-list {
+
+
+                            .navlink {}
+                        }
+
+                    }
+                }
+            } */
+    }
+}

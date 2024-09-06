@@ -1,0 +1,69 @@
+.hero {
+
+
+    @include tablet {
+        position: relative;
+        z-index: 1;
+    }
+
+    .background {
+        display: none;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 41vh;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+
+        @include tablet {
+            display: block;
+        }
+    }
+
+    .container {
+
+        .hero-content {
+            width: 100%;
+            padding-top: 4rem;
+
+
+            @include tablet {
+                width: 60%;
+                position: relative;
+                z-index: 2;
+            }
+
+            @include desktop {
+                padding-top: 10rem;
+            }
+
+
+            .headline {
+                position: absolute;
+                z-index: 1;
+                left: 226px;
+            }
+
+            .ingress {
+            }
+
+            div {
+                padding-bottom: 5rem;
+
+                a {
+                }
+            }
+        }
+    }
+}
+
+
+#hero-slider {
+    .container {
+        .background-image {
+            width: 100%;
+            position: relative;
+        }
+    }
+}
