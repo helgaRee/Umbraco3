@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@*@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ContentModels.MyElementTypeAliasOfContent>>;*@
+
+@{
+
+    var paragraphContent = Model.Content.Value<string>("paragraphContent");
+}
+
+@*Skriver endast ut p om text finns*@
+@if(!string.IsNullOrEmpty(paragraphContent))  
+{  
+    <p>@paragraphContent</p>
+}
+
+
+

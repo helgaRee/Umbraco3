@@ -1,0 +1,14 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var richTextContent = Model?.Content.Value("richTextContent") ?? null;
+}
+
+@*Skriver endast ut om innehåll finns*@
+@if(richTextContent != null) {
+    <div class="content">
+        @richTextContent   
+    </div>
+}
