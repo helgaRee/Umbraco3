@@ -12,11 +12,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 70px;
+    font-size: 40px;
+
+    @include tablet {
+        font-size: 60px;
+    }
+
+    @include ultra-wide {
+        font-size: 70px;
+    }
 }
 
 h2 {
-    font-size: 40px;
+    font-size: 27px;
+
+    @include tablet {
+        font-size: 40px;
+    }
 }
 
 h3 {

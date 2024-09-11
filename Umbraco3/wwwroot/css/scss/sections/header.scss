@@ -1,7 +1,7 @@
 
 header {
-    display: flex;
-    flex-direction: column;
+/*    display: flex;
+    flex-direction: column;*/
 
 
     .topbar {
@@ -9,7 +9,7 @@ header {
         padding: 1rem;
 
         .container {
-            margin-left: 0;
+
 
             .content {
                 display: flex;
@@ -47,97 +47,73 @@ header {
     .navbar {
         width: 100%;
         height: 60px;
-        max-width: 1200px;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-
-        @include tablet {
-            margin: 0 auto;
-        }
-
-
-        .logo {
-
-
-            a {
-            }
-        }
-
-        .links {
+        .container {
             display: flex;
             flex-direction: row;
-            gap: 2rem;
-            display: none;
+            justify-content: space-between;
+            align-items: baseline;
+
 
 
             @include tablet {
+                margin: 0 auto;
+            }
+
+
+            .logo {
+
+
+                a {
+                }
+            }
+
+            .links {
                 display: flex;
-            }
-
-            li {
-                list-style: none;
-            }
-
-            a {
-            }
-        }
-
-        .btn-search {
-
-            position: absolute;
-            top: -6px;
-            right: 0px;
-            padding: 0.6rem;
-
-            @include tablet {
-                position: relative;
-            }
-        }
-
-        .btn-menu {
-            display: block;
-
-            @include tablet {
+                flex-direction: row;
+                gap: 2rem;
                 display: none;
+
+
+                @include tablet {
+                    display: flex;
+                }
+
+                li {
+                    list-style: none;
+                }
+
+                a {
+                }
+            }
+
+            .btn-search {
+                position: absolute;
+                top: -50px;
+                right: 0px;
+                padding: 0.6rem;
+
+                @include tablet {
+                    position: initial;
+                }
+            }
+
+            .btn-menu {
+                display: block;
+
+                @include tablet {
+                    display: none;
+                }
             }
         }
     }
+}
 
-    .top-navigation {
-        .container {
 
-            .navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 0;
-
-                .logo {
-                    align-self: baseline;
-                }
-
-                .menu-bar {
-                    display: block;
-                    cursor: pointer;
-                }
-
-                .navbar-list {
-                    // display: none;
-                    display: flex;
-                    flex-direction: column;
-                    list-style: none;
-                    //position: absolute;
-                    width: 100%;
-                    justify-content: center;
-
-                    .navlink {
-                    }
-                }
-            }
-        }
-        /* 
+            /* 
             @include tablet {
                 .container {
 
@@ -162,5 +138,27 @@ header {
                     }
                 }
             } */
+
+
+
+.hero-header {
+    background-color: var(--color-gray);
+
+    .container {
+        .content {
+            .headline {
+            }
+
+            .breadcrumb {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                padding-left: 0;
+
+                li {
+                    list-style: none;
+                }
+            }
+        }
     }
 }

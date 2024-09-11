@@ -10,7 +10,7 @@
     var siteTagline = settings?.Value<string>("siteTagline") ?? "Financial Solutions";
 
     var siteLogotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
-    var siteThumbnail = settings?.Value<IPublishedContent>("siteThumbnail")?.Url() ?? "";
+    var siteFavicon = settings?.Value<IPublishedContent>("siteFavicon")?.Url() ?? "";
 
     var pageTitle= !string.IsNullOrEmpty(ViewBag.Title) ? $"{ViewBag.Title} | {siteName} - {siteTagline}" : $"{siteName} - {siteTagline}";
 }
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">  
     <link rel="stylesheet" href="/css/blockGrid.css">  
-    <link rel="icon" href="@siteThumbnail" type="">
+    <link rel="icon" href="@siteFavicon" type="">
     <title>@pageTitle</title>
 </head>
 <body>

@@ -20,22 +20,16 @@
 
 
 <section id="@sectionId" class="@spacingTopClass spacingBottomClass">
-    
-    @if (!string.IsNullOrEmpty(backgroundColorClass)) 
-    {
-        <div class="background @bgColorClass"></div>
-    }
-    
-    @*Lägger bakgrundsbilden inom containern*@
-    <div class="container @centerContentClass">
-
+    <div class="@centerContentClass background">
         @if(!string.IsNullOrEmpty(sectionBackgroundImage))
         {
             <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
         }
-
-
-
-        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+    </div>
+    <div class="container">
+        <div class="content">
+            @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+        </div>
+    </div>
     </div>
 </section>

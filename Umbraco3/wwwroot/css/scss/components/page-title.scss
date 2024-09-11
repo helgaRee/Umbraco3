@@ -1,0 +1,39 @@
+.page-title {
+    background-color: var(--color-gray);
+    background-image: url(../../../images/generic/background-img-hero.svg);
+
+    .content {
+        display: flex;
+        flex-direction: column;
+
+
+        .headline {
+
+        }
+
+        .breadcrumb {
+            display: flex;
+            flex-direction: row;
+
+            li {
+                list-style-type: none;
+
+                &:active {
+                }
+            }
+
+            a {
+                color: var(--color-dark);
+            }
+
+            .divider {
+                color: var(--color-dark);
+                margin-inline: 0.5rem;
+            }
+        }
+    }
+}
+
+.active {
+    color: var(--color-secondary);
+}

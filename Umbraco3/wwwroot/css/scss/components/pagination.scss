@@ -1,0 +1,50 @@
+.pagination {
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: baseline;
+
+        .change {
+            padding: 0.5rem 1rem;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 0.5rem;
+            cursor: pointer;
+        }
+
+        .change.inactive {
+            color: #ccc;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .pages {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+
+
+            li {
+                a {
+                    display: inline-block;
+                    padding: 0.5rem;
+                    text-decoration: none;
+                    color: #000;
+                    border: 1px solid transparent;
+                    border-radius: 50%;
+                    width: 2rem;
+                    height: 2rem;
+                    text-align: center;
+                    line-height: 1rem;
+                }
+
+                &.active a {
+                    border: 1px solid var(--color-secondary);
+                }
+            }
+        }
+    }
+}

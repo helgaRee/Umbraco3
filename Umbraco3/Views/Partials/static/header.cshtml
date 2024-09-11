@@ -1,33 +1,49 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@using Umbraco.Cms.Web.Common.PublishedModels;
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 
-@{
-    //hämta root
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+@*
+    This snippet displays a list of links of the pages immediately under the top-most page in the content tree.
+    This is the home page for a standard website.
+    It also highlights the current active page/section in the navigation with the CSS class "current".
+*@
+
+@{ 
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray(); 
+
     var rootContents = UmbracoHelper.ContentAtRoot();
-    var settings = rootContents.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
-    var siteName = settings?.Value<string>("siteName") ?? "";
-    var siteLogotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
-
-    var modular = rootContents.FirstOrDefault(x => x.ContentType.Alias == "modularPage") ?? null!;
-
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage");
+    var logotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
+    var siteName = settings?.Value<string>("siteName") ?? "Onatrix";
     
 }
 
-
-
 <div class="navbar">
-    <div class="logo">
-        <a href="#home"><img src="@siteLogotype" alt="@siteName"></a>
+    <div class="container">
+        <div class="logo">
+            <a href="/onatrix-official-home"><img src="@logotype" alt="@siteName"></a>
+        </div>
+        <ul class="links">
+        @if (selection?.Length > 0)
+        {
+            @foreach (var item in selection)
+            {
+                <li class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
+                    <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                </li>
+            }
+            }
+        </ul>
+        <a href="#" class="btn-search"><i class="fa-light fa-magnifying-glass"></i></a>
+        <button class="toggle_btn btn btn-menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </div>
-    <ul class="links">
-        <li><a href="about">About</a></li>
-        <li><a href="services">Services</a></li>
-        <li><a href="projects">projects</a></li>
-        <li><a href="contact">contact</a></li>
-    </ul>
-    <a href="#" class="btn-search"><i class="fa-light fa-magnifying-glass"></i></a>
-
-    <button class="btn-menu"><i class="fa-regular fa-bars"></i></button>
-
 </div>

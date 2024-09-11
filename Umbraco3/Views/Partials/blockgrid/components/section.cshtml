@@ -4,10 +4,11 @@
 @using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
 @{
+    @*Hämtar ut sectionTitle och skapar ett ID*@
     var sectionTitle = Model?.Content.Value<string>("sectionTitle") ?? "";
     var sectionId = sectionTitle?.ToString().ToLower().Trim().Replace(" ", "-");
-
-    var spacingTopClass = (Model.Content.Value<bool>("addSpaceToTop")) ? "spacing-top" : "";
+    @*Ifsats. Är värdet sant, ska klassen spacing-top användas, annars lämnas tom.*@
+    var spacingTopClass = (Model!.Content.Value<bool>("addSpaceToTop")) ? "spacing-top" : "";
     var spacingBottomClass = (Model.Content.Value<bool>("addSpaceToBottom")) ? "spacing-bottom" : "";
     var centerContentClass =  (Model.Content.Value<bool>("centerContentOnPage")) ? "center" : "";
 
@@ -18,18 +19,35 @@
 }
 
 
+@*style="background-image: url(@sectionBackgroundImage)"*@
+<section id="@sectionId" class="@spacingTopClass spacingBottomClass">
+    
+    
+    @if(!string.IsNullOrEmpty(sectionBackgroundImage)) {
+        <div class="background">
+             <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
+        </div>
 
-<section id="@sectionId" class="@spacingTopClass spacingBottomClass backgroundColorClass" style="background-image: url(@sectionBackgroundImage)"">
+    }
+    
     
     @if (!string.IsNullOrEmpty(backgroundColorClass)) 
     {
         <div class="background @backgroundColorClass"></div>
     }
     
-    @*Lägger bakgrundsbilden inom containern*@
     <div class="container @centerContentClass">
 
+    @*
+    @if(!string.IsNullOrEmpty(sectionBackgroundImage))
+        {
+            <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
+        }
+    
+    *@    <div class="content">
 
         @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+
+    </div>
     </div>
 </section>

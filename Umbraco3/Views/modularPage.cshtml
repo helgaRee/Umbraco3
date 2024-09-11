@@ -6,4 +6,11 @@
 	ViewBag.Title = Model.Value("pageTitle") ?? null;
 }
 
+@*Breadcrumb visas endast om en PageTitle finns angiven.*@
+@if(!string.IsNullOrEmpty(ViewBag.Title))
+{
+	@await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+}
+@*Hämtar ut min blockgrid layout (Modular Page)*@
+
 @await Html.GetBlockGridHtmlAsync(Model.Layout)
