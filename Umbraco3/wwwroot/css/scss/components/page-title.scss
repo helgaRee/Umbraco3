@@ -1,14 +1,15 @@
 .page-title {
     background-color: var(--color-gray);
     background-image: url(../../../images/generic/background-img-hero.svg);
+    height: fit-content;
 
     .content {
         display: flex;
         flex-direction: column;
+        box-shadow: inset 0 0 11px #99999969;
 
 
         .headline {
-
         }
 
         .breadcrumb {
@@ -23,11 +24,11 @@
             }
 
             a {
-                color: var(--color-dark);
+                color: var(--color-default);
             }
 
             .divider {
-                color: var(--color-dark);
+                color: var(--color-default);
                 margin-inline: 0.5rem;
             }
         }

@@ -22,10 +22,6 @@
 
 }
 
-@if(!string.IsNullOrEmpty(ViewBag.Title))
-{
-	@await Html.PartialAsync("partials/static/breadcrumb.cshtml")
-}
 
 
 <section id="our-services" class="our-services">
@@ -93,6 +89,8 @@
 
 	</div>
 </section>
+
+@await Html.PartialAsync("partials/static/contact-component.cshtml");
 
 
 

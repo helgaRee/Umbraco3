@@ -1,0 +1,46 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var slides = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("projectSlides");
+}
+
+
+@if(slides != null) {
+
+    <section id="recent-projects" class="recent-projects">
+        <div class="container">
+
+            <div class="headline">
+                <h5>OUR PROJECTS</h5>
+                <h2>Recent projects</h2>
+            </div>
+
+        <div class="content">
+                @foreach(var item in slides) 
+                {
+                    var image = item.Content.Value<IPublishedContent>("projectImage")?.Url();
+                    var imageDescription = item?.Content.Value<string>("imageDescription") ?? "image slide item";
+                    var footerTitle = item.Content.Value<string>("footerTitle") ?? "";
+                    var subtitle = item.Content.Value<string>("footerSubtitle") ?? "";
+                    var buttonLink = item.Content.Value<string>("buttonLink") ?? "";
+                    var imageLinkUrl = item?.Content.Value<string>("imageLinkUrl") ?? "";
+
+                    @if(!string.IsNullOrEmpty(imageLinkUrl)) {
+                <div class="item-container">
+                    <img src="@image" class="projects-image" />
+                    <a href="/projetcs.html">
+                        <div class="item-footer">
+                            <h6>@footerTitle</h6>
+                            <p>@subtitle</p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>                                                      
+                    }                    
+                }           
+        </div>
+        </div>
+    </section>
+}

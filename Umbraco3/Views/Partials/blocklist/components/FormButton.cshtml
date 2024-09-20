@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var buttonText = Model.Content.Value<string>("buttonText");
+    var buttonType = Model.Content.Value("buttonType");
+}
+
+    <button type="@buttonType" class="form-button btn btn-primary">@buttonText</button>
+
+

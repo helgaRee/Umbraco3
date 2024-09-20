@@ -1,8 +1,35 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters; 
+
+@{
+    var backgroundColorLabel = Model.Content.Value<ColorPickerValueConverter.PickedColor>("containerBackgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none") ? $"bg-{backgroundColorLabel}" : "";
+    
+    
+        @*Ifsats. Är värdet sant, ska klassen klassen användas, annars lämnas tom.*@
+
+    var borderClass = "";
+
+    if(Model.Content.Value<bool>("withBorder")) {
+        borderClass = "border";    
+    } else {
+        borderClass = "";
+    }
+
+    var borderShadow = (Model.Content.Value<bool>("withBorderShadow")) ? "borderShadow" : "";
+
+}
 
 
-<div>
-    @await Html.GetBlockGridItemAreasHtmlAsync(Model)
-</div>
+    <div class="@backgroundColorClass @borderClass @borderShadow">
+
+        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+
+    </div>
+
+
+
+
+

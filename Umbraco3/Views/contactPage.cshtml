@@ -1,0 +1,67 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContactPage>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+	Layout = "mainLayout.cshtml";
+	ViewBag.Title = Model.Value("pageTitle") ?? "";
+
+	var formTitle = Model.Value<string>("formTitle") ?? "";
+	var formHeadline = Model.Value<string>("formHeadline") ?? "";
+	var preamble = Model.Value<string>("formPreamble") ?? "";
+}
+
+
+@await Html.PartialAsync("partials/static/contact-component.cshtml")
+@await Html.GetBlockGridHtmlAsync(Model.Layout)
+@*
+<container>
+	<form onsubmit="handleContactFormSubmit(event)" novalidate>
+		<!-- Blocklist-formuläret renderas ut -->
+		@Html.GetBlockListHtml(Model.ContactForm);
+	</form>
+</container>
+
+*@
+<section class="contact-form">
+
+<div class="container">
+	
+<div class="headline">
+	<h4>@formTitle</h4>
+	<h2>@formHeadline</h2>
+	<p>@preamble</p>
+</div>
+
+
+	@using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+	{
+		<div class="form-input-group">
+			<label for="name" class="form-label"></label>
+			<input id="name" name="name" type="text" placeholder="Enter your name" class="form-input" />
+			<span class="form-input-error"></span>
+		</div>
+		<div class="form-input-group">
+			<label for="phone" class="form-label"></label>
+			<input id="phone" name="phone" type="text" placeholder="Enter your number" class="form-input" />
+			<span class="form-input-error"></span>
+		</div>
+		<div class="form-input-group">
+			<label for="email" class="form-label"></label>
+			<input id="email" name="email" type="email" placeholder="Enter your email" class="form-input" />
+			<span class="form-input-error"></span>
+		</div>
+			<div class="form-input-group">
+			<label for="" class="form-label"></label>
+			<input id="list" name="list" type="text" placeholder="Financial consulting" class="form-input" />
+			<span class="form-input-error"></span>
+		</div>
+		<button type="submit" class="form-button btn btn-primary">Submit</button>
+	}
+
+
+</div>
+
+</section>
+
+@await Html.PartialAsync("partials/static/partnersItem.cshtml");

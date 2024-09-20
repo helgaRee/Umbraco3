@@ -1,0 +1,22 @@
+
+
+#success-stories {
+    margin-top: 0;
+    padding-top: 4rem;
+    margin-bottom: 8rem;
+
+    @include tablet {
+        margin-bottom: 18rem;
+    }
+
+    .image-success-story {
+        width: 100%;
+
+        @include desktop {
+            position: absolute;
+            right: -10px;
+            object-fit: contain;
+            top: 23px;
+        }
+    }
+}

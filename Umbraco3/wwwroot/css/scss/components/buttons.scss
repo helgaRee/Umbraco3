@@ -20,3 +20,10 @@
 
 
 }
+
+.btn-submit {
+    @include btn;
+    background-color: var(--color-secondary);
+
+}
+

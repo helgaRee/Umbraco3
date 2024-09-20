@@ -1,0 +1,102 @@
+.contact-section {
+    background-color: none;
+    padding-bottom: 0;
+    padding-top: 4rem;
+
+
+
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
+
+        @include tablet {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        @include desktop {
+            column-gap: 5rem;
+        }
+
+
+
+        .contact-images {
+            .img-background {
+                position: relative;
+                bottom: -64px;
+
+                @include tablet {
+                    bottom: -101px;
+                }
+
+                img {
+                    width: 50%;
+
+                    @include tablet {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .img-front {
+                position: absolute;
+                top: 69%;
+
+                @include tablet {
+                    top: 28.2%;
+                }
+
+                @include desktop {
+                    top: 7.5%;
+                }
+
+                img {
+                    width: 50%;
+
+                    @include tablet {
+                        width: 60%;
+                    }
+
+                    @include desktop {
+                        width: 80%;
+                    }
+                }
+            }
+        }
+
+        .content {
+            .headline {
+                h2 {
+                    text-align: left;
+                    margin-bottom: 3rem;
+                    margin-left: 0;
+                }
+            }
+
+            .contact-item {
+                display: grid;
+                grid-template-areas: "icon headline" "icon subline";
+                grid-template-columns: auto 2fr;
+                gap: 1rem;
+
+                .left-icon {
+                    i {
+                        grid-area: icon;
+                    }
+                }
+
+                .contact-details {
+                    text-align-last: start;
+
+                    h6 {
+                        grid-area: headline;
+                    }
+
+                    .subline {
+                        grid-area: subline;
+                    }
+                }
+            }
+        }
+    }
+}

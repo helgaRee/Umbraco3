@@ -20,34 +20,15 @@
 
 
 @*style="background-image: url(@sectionBackgroundImage)"*@
-<section id="@sectionId" class="@spacingTopClass spacingBottomClass">
-    
-    
-    @if(!string.IsNullOrEmpty(sectionBackgroundImage)) {
-        <div class="background">
-             <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
-        </div>
+<section id="@sectionId" class="@spacingTopClass @spacingBottomClass @backgroundColorClass" style="background-image: url(@sectionBackgroundImage)">
 
-    }
-    
     
     @if (!string.IsNullOrEmpty(backgroundColorClass)) 
     {
         <div class="background @backgroundColorClass"></div>
     }
     
-    <div class="container @centerContentClass">
-
-    @*
-    @if(!string.IsNullOrEmpty(sectionBackgroundImage))
-        {
-            <img class="background-image" src="@sectionBackgroundImage" alt="@sectionTitle background image" />
-        }
-    
-    *@    <div class="content">
-
-        @await Html.GetBlockGridItemAreasHtmlAsync(Model)
-
-    </div>
+    <div class="@centerContentClass">
+        @await Html.GetBlockGridItemAreasHtmlAsync(Model!)
     </div>
 </section>

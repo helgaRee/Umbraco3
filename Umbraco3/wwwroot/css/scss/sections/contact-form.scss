@@ -1,0 +1,58 @@
+.contact-form {
+    margin-top: 29rem;
+    padding: 3rem;
+
+    .container {
+        display: grid;
+        box-shadow: 0px 0px 6px gray;
+        padding: 3rem;
+        background: white;
+
+        @include desktop {
+        position: absolute;
+        top: 70rem;
+        left: 15rem;
+
+        }
+
+        .headline {
+            width: 50%;
+            margin: auto;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+
+            .form-input-group {
+                display: flex;
+                flex-direction: column-reverse;
+
+                .form-label {
+                }
+
+                .form-input {
+                    padding: 0.8rem;
+                    border: 1px solid var(--color-border-light);
+                    color: var (--color-primary);
+                    font-style: italic;
+                }
+
+                .form-input-error {
+                    color: red;
+                    font-size: 0.9em;
+                    font-weight: 400;
+                }
+            }
+
+            .form-button {
+                grid-column: 1 / span 2;
+                justify-self: center;
+                padding-inline: 2.5rem;
+                color: var(--color-accent);
+                border: none;
+            }
+        }
+    }
+}

@@ -1,75 +1,124 @@
-.hero {
-
-
-    @include tablet {
-        position: relative;
-        z-index: 1;
-    }
-
-    .background {
-        display: none;
-        background-size: cover;
-        background-position: center;
-        width: 100%;
-        height: 41vh;
-        position: absolute;
-        top: 0;
-        z-index: 1;
-
-        @include tablet {
-            display: block;
-        }
-    }
+#hero {
+    margin-block: 3rem;
 
     .container {
-
-        .hero-content {
-            width: 100%;
-            padding-top: 4rem;
-
+        .background-image-section {
+            opacity: 20%;
 
             @include tablet {
-                width: 60%;
-                position: relative;
-                z-index: 2;
+                opacity: 100%;
             }
 
             @include desktop {
-                padding-top: 10rem;
+                height: 50vh;
+            }
+        }
+
+        .content {
+            padding-block: 2rem;
+
+            @include tablet {
+                //padding-block: 2rem;
             }
 
-
-            .headline {
-                position: absolute;
-                z-index: 1;
-                left: 226px;
+            @include desktop {
+                padding-block: 4rem;
             }
 
-            .ingress {
+            h1 {
+
+                @include tablet {
+                    font-size: 50px;
+                }
             }
 
-            div {
-                padding-bottom: 5rem;
+            p {
+                width: 56%;
 
-                a {
+                @include tablet {
+                    width: 70%;
+                }
+
+                @include desktop {
+                    width: 100%;
                 }
             }
         }
     }
 }
+//.hero {
+
+
+//    @include tablet {
+//        position: relative;
+//        z-index: 1;
+//    }
+
+//    .background {
+//        display: none;
+//        background-size: cover;
+//        background-position: center;
+//        width: 100%;
+//        height: 41vh;
+//        position: absolute;
+//        top: 0;
+//        z-index: 1;
+
+//        @include tablet {
+//            display: block;
+//        }
+//    }
+
+//    .container {
+
+//        .hero-content {
+//            width: 100%;
+//            padding-top: 4rem;
+
+
+//            @include tablet {
+//                width: 60%;
+//                position: relative;
+//                z-index: 2;
+//            }
+
+//            @include desktop {
+//                padding-top: 10rem;
+//            }
+
+
+//            .headline {
+//                position: absolute;
+//                z-index: 1;
+//                left: 226px;
+//            }
+
+//            .ingress {
+//            }
+
+//            div {
+//                padding-bottom: 5rem;
+
+//                a {
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 
-#hero-slider {
+//#hero-slider {
+//    background-repeat: no-repeat;
 
-    background-repeat: no-repeat;
-
-    .container {
-        .background-image {
-             width: 100%;
-            //position: relative;
-
-            background-repeat: no-repeat;
-        }
-    }
-}
+//    .container {
+//        .background-image {
+//            width: 100%;
+//            background-position: center;
+//            background-repeat: no-repeat;
+//            background-size: cover;
+//            position: relative;
+//            background-repeat: no-repeat;
+//        }
+//    }
+//}

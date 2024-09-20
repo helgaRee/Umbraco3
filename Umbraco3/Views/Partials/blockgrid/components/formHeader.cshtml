@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters
+
+@{
+    var backgroundColorLabel = Model.Content.Value<ColorPickerValueConverter.PickedColor>("formHeaderBackgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none") ? $"bg-{backgroundColorLabel}" : "";
+    
+    var headline = Model.Content.Value<string>("formHeadline") ?? "";
+
+
+
+}
+
+
+    <div class="form-header @backgroundColorClass">
+        <h3>@headline</h3>
+    </div>

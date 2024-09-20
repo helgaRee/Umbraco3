@@ -1,0 +1,63 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
+@{
+	@*Hämtar ut properties*@
+	var sectionTitle = Model.Content.Value<string>("sectionTitle") ?? ""; 
+	var headline =  Model.Content.Value<string>("headline") ?? "";
+
+	var colorLabel = Model.Content.Value<ColorPickerValueConverter.PickedColor>("sectionBackgroundColor")?.Label.ToLower() ?? null;
+	var backgroundColorClass = !string.IsNullOrEmpty(colorLabel) ? $"bg-{colorLabel}" : "";
+	var selection = Umbraco.Content(Guid.Parse("65b7a274-f827-4dd1-ad48-f2bc92605393"))?
+    .ChildrenOfType("serviceItemTemplate")?
+    .Where(x => x.IsVisible())
+	.Take(6);
+}
+@*
+
+<ul>
+	@foreach (var item in selection)
+	{
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+	}
+</ul>
+
+*@
+<section id="our-services" class="our-services @backgroundColorClass">
+@if(!string.IsNullOrEmpty(backgroundColorClass)) 
+{
+	<div class="background @backgroundColorClass"></div>
+}
+
+	<div class="container">
+		<div class="content">
+				<div class="headline">
+					<h6>@sectionTitle</h6>
+					<h2>@headline</h2>
+				</div>
+			<div class="content-grid services">
+				@if(selection != null) 
+				{
+					@foreach(var item in selection) 
+					{
+						var image = item.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+						var preamble = item.Value<string>("preamble") ?? "";
+
+						<a href="@item.Url()">
+							<div class="item-container">
+								<h4>@item.Name</h4>
+								<img src="@image" alt="@item.Name()" class="services-item-image" />
+								<p class="item-text">@preamble</p>
+							</div>
+						</a>
+					}
+				}
+			</div>
+		</div>
+	</div>
+
+</section>

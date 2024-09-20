@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@
+{
+    var headline = Model.Value<string>("sidebarHeadline") ?? "";
+    var image = Model.Value<IPublishedContent>.("sidebarImage")?.Url() ?? null;
+    var text = Model.Value<string>("sidebarText") ?? "";
+}
+
+<aside>
+    <h5>@headline</h5>
+    <img src="@image" />
+    <p class="text"></p>
+</aside>

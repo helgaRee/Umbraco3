@@ -2,8 +2,18 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
-@*@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ContentModels.MyElementTypeAliasOfContent>>;*@
-<div class="container">
+@{
+    var containerBackgroundImage = Model?.Content?.Value<IPublishedContent>("containerBackgroundImage")?.Url() ?? null;
+
+}
+
+<div class="container @containerBackgroundImage">
+
+@if(!string.IsNullOrEmpty(containerBackgroundImage)) 
+{
+    <div class="background-image-container" style="background-image: url(@containerBackgroundImage)"></div>
+}
+
     @* Render the block areas *@
     @await Html.GetBlockGridItemAreasHtmlAsync(Model)
 </div>

@@ -1,0 +1,64 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+
+    var sectionTitle = settings?.Value<string>("officeHeadline") ?? "";
+    var locationTitle = settings?.Value<string>("locationTitle") ?? "";
+    var officeLocation = settings?.Value<string>("officeLocation") ?? "";
+
+    var numberTitle = settings?.Value<string>("phoneTitle") ?? "";
+    var officeNumber = settings?.Value<string>("officePhoneNumber") ?? "";
+
+    var emailTitle = settings?.Value<string>("emailTitle") ?? "";
+    var officeEmail = settings?.Value<string>("officeEmailAddress") ?? "";
+
+    var imgBack = settings?.Value<IPublishedContent>("imgBack")?.Url() ?? "";
+    var imgFront = settings?.Value<IPublishedContent>("imgFront")?.Url() ?? "";
+
+}
+
+
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-images">
+
+            <div class="img-background">
+                <img src="@imgBack" alt="">
+            </div>
+            <div class="img-front">
+                    <img src="@imgFront" alt="">
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="headline">
+                <h2>@sectionTitle"</h2>
+            </div>
+            <div class="contact-item">
+                <div class="left-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="contact-details">
+                    <h6>@locationTitle</h6>
+                    <p class="subline">@officeLocation</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="left-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="contact-details">
+                    <h6>@numberTitle</h6>
+                    <p class="subline">@officeNumber</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="left-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="contact-details">
+                    <h6>@emailTitle</h6>
+                    <p class="subline">@officeEmail</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

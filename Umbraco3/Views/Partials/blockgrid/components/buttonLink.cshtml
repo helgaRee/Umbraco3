@@ -6,13 +6,33 @@
     var buttonLinkText = Model?.Content.Value<string>("buttonLinkText");
     var buttonLinkUrl = Model?.Content.Value<string>("buttonLinkUrl");
     var buttonLinkColor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("buttonLinkColor")?.Label.ToLower() ?? null;
+
+    var buttonCenter = (Model.Content.Value<bool>("buttonCenter")) ? "button-center" : "";
+    var buttonLeft = (Model.Content.Value<bool>("buttonLeft")) ? "button-left" : "";
+    var buttonRight = (Model.Content.Value<bool>("buttonRight")) ? "button-right" : "";
+
+
+@*
+    var buttonAlignment = Model?.Content<string>("buttonAlignment") ?? "";
+        
+        var alignmentClass = buttonAlignment switch
+        {
+            "start" => "align-self-start",
+            "center" => "align-self-center",
+            "End" => "align-self-end",
+            _ => "align-self-start"
+        };
+*@
 }
+
 
 @if(!string.IsNullOrEmpty(buttonLinkColor)) 
 {
-    <a href="@buttonLinkUrl" title="buttonLinkText" class="btn btn-@buttonLinkColor">@buttonLinkText</a>
+    <a href="@buttonLinkUrl" title="buttonLinkText" class="btn btn-@buttonLinkColor @buttonLeft @buttonCenter @buttonRight">@buttonLinkText</a>
 }
 else
 {
-    <a href="@buttonLinkUrl" title="@buttonLinkText" class="btn">@buttonLinkText</a>
+    <a href="@buttonLinkUrl" title="@buttonLinkText" class="btn @buttonLeft @buttonCenter @buttonRight">@buttonLinkText</a>
 }
+
+

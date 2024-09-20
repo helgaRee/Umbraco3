@@ -4,9 +4,14 @@
 
 @{
     var quotationContent = Model?.Content.Value<string>("quotationContent");
+        var blockquote = Model.Content.Value<string>("blockquote");
 }
 
 @if(!string.IsNullOrEmpty(quotationContent)) 
 {
     <q>@quotationContent</q>
+}
+
+@if(!string.IsNullOrEmpty("blockquote")) {
+    <blockquote>@blockquote</blockquote>
 }

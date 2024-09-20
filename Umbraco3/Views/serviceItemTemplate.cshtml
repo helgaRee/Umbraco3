@@ -1,18 +1,99 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ServiceItemTemplate>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
+
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model.Value("pageTitle") ?? null;
-	@*Hans kör Model.Name; bara*@
-}
 
-@if(!string.IsNullOrEmpty(ViewBag.Title))
-{
-	@await Html.PartialAsync("partials/static/breadcrumb.cshtml")
-}
 
+
+	//Mappar fälten för ERROR
+	//kontrollerar om det finns ett bool värde
+	//kan vi konvertera värdet till bool? skriv isåfall ut variabler
+	bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+	bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+	bool.TryParse(ViewData["error_message"]?.ToString()!, out bool error_message);
+
+
+
+@*
+var aboutPage = Model.AncestorsOrSelf().FirstOrDefault(x => x.ContentType.Alias == "aboutPage") ?? null;
+var membersList = aboutPage?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("membersList") ?? null;
+var serviceItemPage = Model.AncestorsOrSelf().FirstOrDefault(x => x.ContentType.Alias == "serviceItemTemplate") ?? null;
+var sidebarHeadline = Model?.Value<string>("sidebarHeadline") ?? "";
+var formHeadline = Model.Value<string>("formHeadline") ?? "";
+var tags = Model?.Value<IEnumerable<string>>("tags");
+*@
+
+}
 <section class="service-details">
 	<div class="container">
-		@Model.Value("pageContent")
+		@Model?.Value("pageContent")
+		@await Html.PartialAsync("Blockgrid/components/sidebarBox", Model)
+
+
+			@if(TempData["success"] != null)
+			{
+				<div class="success-message">@TempData["success"]</div>
+
+			}
+			else
+			{
+		
+				@using (Html.BeginUmbracoForm("HandleQuestionFormSubmit", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate"})) 
+				{
+					@Html.GetBlockListHtml(Model?.QuestionForm);
+				}
+			
+			}
+
 	</div>
 </section>
+
+
+
+@*  @using (Html.BeginUmbracoForm("HandleQuestionFormSubmit", "ContactSurface", FormMethod.Post))
+
+ {
+ 	<div class="form-input-group">
+ 		<label for="name" class="form-label"></label>
+ 		<input id="name" name="name" type="text" placeholder="Enter your name" class="form-input" />
+ 		<span class="form-input-error"></span>
+ 	</div>
+ 	<div class="form-input-group">
+ 		<label for="email" class="form-label"></label>
+ 		<input id="email" name="email" type="email" placeholder="Enter your email" class="form-input" />
+ 		<span class="form-input-error"></span>
+ 	</div>
+ 	<div class="form-input-group">
+ 		<label for="phone" class="form-label"></label>
+ 		<input id="phone" name="phone" type="text" placeholder="Enter your number" class="form-input" />
+ 		<span class="form-input-error"></span>
+ 	</div>
+ 	<button type="submit" class="form-button btn btn-primary">Submit</button>
+ } *@
+
+@*
+
+<aside class="sidebar-container">
+			<div class="tag-content">
+				@if(tags != null) {
+						<h4>@sidebarHeadline</h4>
+						<h2>@formHeadline</h2>
+					<ul class="tag-list">
+						@foreach(var tag in tags) {
+							<li class="tag-item">@tag</li>
+						}
+					</ul>
+				}
+			</div>
+			<div class="text-content">
+				<h4>@sidebarHeadline</h4>
+				<p class="support-text">
+					
+				</p>
+				<input type="email" placeholder="E-mail Address">
+			</div>
+    </aside>*@
+

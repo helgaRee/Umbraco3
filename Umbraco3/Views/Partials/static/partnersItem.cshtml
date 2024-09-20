@@ -1,0 +1,37 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+
+@{
+    //kom åt root och 
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage");
+    var partnersList = settings?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("partnersList") ?? null;
+}
+
+@*
+1. Kolla om socialMediaPlatform är tom först
+2. Om det finns information, kicka igång en foreach-loop, som loopar igenom listan med socialmediaItems
+3. För varje Item ska platformsnamnet och platform account url hämtas ut.
+4. Därefter skickas allting in i en Switch med olika case.
+*@
+
+@if(partnersList != null) {
+    <section id="partners" class="image-slider">
+        <div class="container">
+            <div class="slides">
+                @foreach(var partner in partnersList) {
+                    var image = partner?.Content.Value<IPublishedContent>("partnersImage").Url();
+                    var altText = partner.Content.Value<string>("imageDescription") ?? "";
+
+                            <img src="@image" alt="@altText" class="slide-item" />
+            
+    }
+                        </div>
+                    </div>
+                </section>
+}
+
+
+
+    

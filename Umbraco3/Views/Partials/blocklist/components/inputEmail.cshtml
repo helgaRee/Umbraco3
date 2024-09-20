@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var uniqueName = Model.Content.Value<string>("uniqueName") ?? "";
+    var label = Model.Content.Value<string>("labelText") ?? "";
+    var hideLabel = Model.Content.Value<bool>("hideLabel");
+    var placeholder = Model.Content.Value<string>("placeholderText") ?? "";
+    
+    var isRequired = Model.Content.Value<bool>("isRequired");
+    var errorMessage = Model.Content.Value<string>("errorMessage") ?? "";
+
+    bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+}
+
+<div id="_@uniqueName" class="form-input-group">
+    @if(!hideLabel) {
+        <label for="@uniqueName">@label</label>
+    } else {
+        <label for="@uniqueName"></label>
+
+    }
+    <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["email"]">
+    
+
+    @if(string.IsNullOrEmpty(uniqueName))
+    {
+        <span class="form-invalid-input">@errorMessage</span> 
+    }
+    
+
+</div>

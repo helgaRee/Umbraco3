@@ -25,3 +25,16 @@
 .btn-menu {
     @include button-colors(--color-primary, --color-secondary, --color-accent, --color-primary, --color-light);
 }
+
+.button-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.button-left {
+    align-self: left;
+}
+.button-right {
+    align-self: right;
+}

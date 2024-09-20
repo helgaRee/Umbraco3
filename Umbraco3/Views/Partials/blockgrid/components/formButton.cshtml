@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var buttonText = Model.Content.Value<string>("buttonText");
+    var buttonType = Model.Content.Value("buttonType");
+    var border = (Model.Content.Value<bool>("withBorder")) ? "borderClass" : "";
+}
+
+<div>
+    <button type="@buttonType" class="btn-submit @border">@buttonText</button>
+</div>

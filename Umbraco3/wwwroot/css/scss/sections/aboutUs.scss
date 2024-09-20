@@ -1,0 +1,187 @@
+#about-us {
+
+
+    .container {
+        //padding-block: 9rem;
+        display: flex !important;
+        flex-direction: row !important;
+
+        @include tablet {
+            padding-block: 3rem;
+        }
+
+        @include desktop {
+        }
+
+        .form-header {
+            padding: 1rem;
+
+            h3 {
+            }
+        }
+
+        .input-item {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .content {
+            img {
+                padding: 3rem;
+                width: 100%;
+            }
+
+            blockquote {
+            }
+
+            p {
+                color: var(--color-default);
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+@include tablet {
+    #about-us {
+        .container {
+            .content {
+                img {
+                    padding: 0rem;
+                }
+
+                q {
+                }
+
+                p {
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@include desktop {
+    #about-us {
+        .container {
+            .content {
+                img {
+                }
+
+                q {
+                }
+
+                p {
+                    color: var(--color-default);
+                    margin-left: 5rem;
+                }
+            }
+        }
+    }
+}
+
+
+#great-reviews {
+    padding-block: 3rem;
+
+    .content {
+        padding-inline: 1rem;
+    }
+
+    img {
+        padding: 1rem;
+    }
+
+    h3 {
+    }
+
+    h3, h2, p {
+    }
+}
+
+    @include tablet {
+        #great-reviews {
+            padding-block: 3rem;
+
+            .content {
+                width: 90%;
+                margin: auto;
+            }
+
+            img {
+                padding: 3rem;
+            }
+
+            h3 {
+            }
+
+            h3, h2, p {
+                padding-left: 2rem;
+            }
+        }
+    }
+
+@include desktop {
+    #great-reviews {
+        padding-block: 3rem;
+
+        .content {
+            width: 64%;
+            margin: auto;
+            padding-block: 2rem;
+        }
+
+        img {
+            padding: 3rem;
+        }
+
+        h3 {
+        }
+
+        h3, h2, p {
+            padding-left: 2rem;
+        }
+    }
+}
+
+@include ultra-wide {
+    #great-reviews {
+        padding-block: 3rem;
+
+        .content {
+            margin-top: 7rem;
+        }
+
+        img {
+            width: fit-content;
+        }
+
+        h3 {
+        }
+
+        h3, h2, p {
+            padding-left: 2rem;
+        }
+    }
+}
+
+
+.bg-primary {
+    padding: 1rem;
+
+    @include tablet {
+        padding: 1rem;
+    }
+
+    @include desktop {
+        padding: 3rem;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    span {
+    }
+}

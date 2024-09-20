@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    
+    var multipleChoiceList = Model.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
+
+
+}
+
+@if(multipleChoiceList.Any())
+{
+    <select>
+        @foreach (var option in multipleChoiceList)
+        {
+            <option value="@option">@option</option>
+        }
+    </select>
+}
+else {
+      <p>No options available</p>
+}
+
+
+
+
+
+
+

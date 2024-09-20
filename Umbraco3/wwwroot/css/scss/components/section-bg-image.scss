@@ -1,0 +1,41 @@
+.background-image-section {
+    position: absolute;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+}
+
+
+
+
+.background-image-container {
+    position: absolute;
+    top: -115px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+
+.image-success-story {
+    position: absolute;
+    right: 0;
+    object-fit: contain;
+    top: 23px;
+}
+
+#contact-us-background-image {
+    .background-image-section {
+        img {
+            width: 100% !important;
+        }
+    }
+}

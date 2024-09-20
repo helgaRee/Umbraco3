@@ -1,0 +1,15 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AboutPage>;
+
+
+@{
+	Layout = "mainLayout.cshtml";
+	ViewBag.Title = Model.Value("pageTitle") ?? "";
+}
+
+@await Html.GetBlockGridHtmlAsync(Model.Layout);
+
+@await Html.PartialAsync("partials/static/teamMembers.cshtml");
+
+@await Html.PartialAsync("partials/static/contact-component.cshtml");

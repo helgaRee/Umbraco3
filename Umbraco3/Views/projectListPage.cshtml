@@ -2,4 +2,140 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
 	Layout = "mainLayout.cshtml";
+	ViewBag.Title = Model.Value("pageTitle") ?? null;
+
+	var selection = Umbraco.Content(Guid.Parse("21449e10-7f77-4793-a45f-07fb927fe6e8"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible());
+
+	var itemsPerPage = 2;
+
+	@*kollar efter ett attribut i vår url. Hämtar ut aktuella pageNr, sparar in det i variabel*@
+	@*Om parsing inge funkar, sättts till 1*@
+	if(!int.TryParse(Context.Request.Query["page"], out int currentPage))
+		currentPage = 1;
+
+	@*Räknar antalet hätmade objekt*@
+	var totalItems = selection?.Count() ?? 0;
+	@*Tar bara de aktuella objekten vi vill sortera ut (6)*@
+	var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+
+	var asideTitle = Model.Value<string>("asideTitle") ?? "";
+	var bodyText = Model.Value<string>("bodytextSupport") ?? "";
+	var headlineSupport = Model.Value<string>("headlineSupport") ?? "";
+
+	var keywords = Model.Value<IEnumerable<string>>("keywords");
+
 }
+
+
+@*
+<table style="font-size: 13px; line-height: 1.5em;">
+    <tr>
+        <td class="innerTD">
+            <div style="min-height:600px; width: 465px;">
+<div id="contentHeader">    
+    <h2><umbraco:Item runat="server" field="pageName"/>@asideTitle</h2>
+</div>
+
+                <form id="RunwayMasterForm" runat="server">
+                    <umbraco:Item runat="server" field="bodyText" />
+                </form>
+            </div>
+        </td>
+        <td style="width: 250px; padding: 8px;">
+            <umbraco:Item runat="server" field="sidebarText" />
+        </td>
+    </tr>
+</table>
+		
+
+*@
+
+
+
+ <section class="our-projects">
+    <div class="container">
+		<div class="sidebar-right">
+			<div class="tag-content">
+				@if(keywords.Any()) {
+						<h4>@asideTitle</h4>
+					<ul class="tag-list">
+						@foreach(var tag in keywords) {
+							<li class="tag-item">@tag</li>
+						}
+					</ul>
+				}
+			</div>
+			<div class="text-content">
+				<h4>@headlineSupport</h4>
+				<p class="support-text">
+					@bodyText
+				</p>
+				<input type="email" placeholder="E-mail Address">
+			</div>
+		</div>
+		<div class="projects-content">
+			@if(pagedItems != null) 
+			{
+				@foreach(var item in pagedItems) {
+					var image = item.Value<IPublishedContent>("projectThumbnailImage").Url() ?? "";
+					var preamble = item.Value<string>("projectPreamble") ?? "";
+					var headline = item.Value<string>("projectTitle") ?? "";
+					var published = item.Value<string>("projectPublished") ?? "";
+					var calenderIcon = item.Value<string>("calenderIcon") ?? "";
+					var projectLink = item.Value<string>("projectLink") ?? "";
+					var projectLinkText = item.Value<string>("projectLinkText") ?? "";
+				
+
+				<div class="item">
+					<div class="item-img">
+						<img src="@image" alt="@item.Name()">
+					</div>
+					<din class="item-content">
+						<h4>@headline</h4>
+						<span class="published">@published</span>
+						<p>@preamble</p>
+						<a href="@item.Url()"><i class="fa-solid fa-arrow-right"></i>@projectLinkText</a>
+					</din>
+				</div>
+				}
+			}
+															@*PAGINATION*@
+			<section class="pagination">
+				<div class="container">
+					
+					@if (currentPage > 1)
+					{
+						<a href="?page=@(currentPage - 1)" class="change">PREV</a>
+					}
+					else 
+					{
+						<span class="change inactive">PREV</span>
+					}
+	@*Loopar igenom alla sidor vi har*@
+					<ul class="pages">
+					@for(int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
+					{
+						<li class="@((i == currentPage) ? "number active" : "number")">
+							<a href="?page=@i">@i</a>
+						</li>
+					}
+					</ul>
+	@*kontrollerar hur många sidor som finns*@
+					@if(currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage))
+					{
+						<a class="change" href="?page=@(currentPage + 1)">NEXT</a>
+					}
+					else
+					{
+						<span class="change inactive">NEXT</span>
+					}
+				</div>
+			</section>
+		</div>
+    </div>
+</section> 
+
+	@await Html.PartialAsync("partials/static/contact-component.cshtml");
+

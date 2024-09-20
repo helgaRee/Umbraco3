@@ -8,15 +8,17 @@
     --color-accent: #F2EDDC;
     --color-gray: #F7F7F7;
     --color-light: #FFFFFF;
+    --color-gray-dark: #9C9EA6;
     --color-border-dark: #333333;
     --color-border-border-dark-transparent: rgba(51, 51, 51, 0.10);
     --color-border-primary: #424946;
     --color-border-secondary: #c0ac94;
     --color-border-accent: #d5d1c2;
     --color-border-gray: #e3e3e3;
-    --color-border-light: #eeeeee;
+    --color-border-light: #E6E6E6;
     --color-border-light-transparent: rgba(255, 255, 255, 0.95);
 }
+
 
 :root.dark-theme {
     --color-dark: #e0e0e0;

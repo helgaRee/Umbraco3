@@ -1,0 +1,51 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters
+
+
+@{
+    var sidebarTitle = Model.Value<string>("sidebarTitle") ?? "";
+    var image = Model.Value<IPublishedContent>("sidebarImage")?.Url() ?? null;
+    var sidebarText = Model.Value<string>("sidebarText") ?? "";
+
+    var supportTitle = Model.Value<string>("supportTitle") ?? "";
+    var supportText = Model.Value<string>("supportText") ?? "";
+    var inputEmail = Model.Value<string>("inputEmail");
+
+    var backgroundColorLabel = Model.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label;
+    var backgroundColorClass = !string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none" 
+        ? $"bg-{backgroundColorLabel}" 
+        : "";
+
+    var emailIcon = Model.Value<IPublishedContent>("emailIcon")?.Url() ?? "";
+
+    var tagList = Model.Value<IEnumerable<string>>("tags") ?? null;
+    var border = Model.Value<bool>("withBorder") ? "borderClass" : "";
+    var borderRadius = Model.Value<bool>("withBorderRadius") ? "borderRadiusClass" : "";
+}
+
+<aside>
+    <div class="sidebar-info">
+        <h5>@sidebarTitle</h5>
+        <img src="@image" />
+        <p class="text">@sidebarText</p>
+    </div>
+
+    <div class="sidebar-support @backgroundColorClass">
+        <h5>@supportTitle</h5>
+        <p class="text">@supportText</p>
+        <input type="email">
+    </div>
+    
+    @if(tagList != null) {
+        <div class="sidebar-tags">
+                <ul class="tag-list">
+                    @foreach(var tag in tagList) {
+                        <li class="tag-item">@tag</li>
+                    }
+				</ul>
+        </div>
+            }
+    
+</aside>

@@ -1,0 +1,15 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    @*klasser*@
+    var sidebarRight = (Model.Content.Value<bool>("sidebarToTheRight")) ? "sidebar-right" : "";
+    var sidebarLeft = (Model.Content.Value<bool>("sidebarToTheLeft")) ? "sidebar-left" : "";
+}
+
+@if(sidebarRight) {
+    <aside class="@sidebarRight"></aside>
+}
+else if(sidebarLeft) {
+    <aside class="@sidebarLeft"></aside>
+}

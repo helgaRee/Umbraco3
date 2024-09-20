@@ -21,10 +21,40 @@
 @import "components/image-slider.scss";
 @import "components/page-title.scss";
 @import "components/pagination.scss";
+@import "components/section-bg-image.scss";
 
 
 @import "../scss/sections/header.scss";
 @import "../scss/sections/hero.scss";
 @import "../scss/sections/aboutUs.scss";
 @import "../scss/sections/ourServices.scss";
+@import "../scss/sections/projects.scss";
+@import "../scss/sections/ourProjects.scss";
+@import "../scss/sections/successStories.scss";
+@import "../scss/sections/footer.scss";
+@import "../scss/sections/contact-component.scss";
+@import "../scss/sections/teamMembers.scss";
+@import "../scss/sections/contact-form.scss";
+
+
+
+
+#trusted-group {
+
+    .container {
+        display: flex;
+        text-align: center;
+    }
+
+
+    .btn {
+        margin-bottom: 3rem;
+    }
+
+    img{
+        width: 100%;
+    }
+}
+
+
 

@@ -1,9 +1,10 @@
 .pagination {
     .container {
         display: flex;
-        flex-direction: row;
+        flex-direction: row !important; 
         justify-content: center;
         align-items: baseline;
+
 
         .change {
             padding: 0.5rem 1rem;
