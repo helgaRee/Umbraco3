@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 @{
@@ -10,18 +10,12 @@
     var isRequired = Model.Content.Value<bool>("isRequired");
     var errorMessage = Model.Content.Value<string>("errorMessage") ?? "";
 
-
-
-
-
-
-
     bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
     // Kontrollera om formuläret har skickats
     bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
 }
 
-<div id="_@uniqueName" class="form-input-group">
+<div id="_@uniqueName" class="input-item">
     @if(!hideLabel) {
         <label for="@uniqueName">@label</label>
     } else {
@@ -29,16 +23,12 @@
 
     }
     <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["email"]">
+    
 
-
-    <span class="form-input-error @(error_email ? "form-invalid-input" : "")">
-        @if (error_email)
-        {
-            <span class="form-invalid-input">@errorMessage</span>
-        }
-    </span>
-@* 
-    <span class="form-input-error @((error_email) ? "form-invalid-input": null)">Måste lägga in namn</span> *@
+    @if(string.IsNullOrEmpty(ViewData["email"]?.ToString()))
+    {
+        <span class="form-invalid-input">@errorMessage</span> 
+    }
     
 
 </div>

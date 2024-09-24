@@ -98,12 +98,52 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::System.Collections.Generic.IEnumerable<string> Keywords => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "keywords");
 
 		///<summary>
+		/// Recent Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentHeadline")]
+		public virtual string RecentHeadline => this.Value<string>(_publishedValueFallback, "recentHeadline");
+
+		///<summary>
+		/// Recent Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops RecentImage => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "recentImage");
+
+		///<summary>
+		/// Recent Project Publiched
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentProjectPubliched")]
+		public virtual string RecentProjectPubliched => this.Value<string>(_publishedValueFallback, "recentProjectPubliched");
+
+		///<summary>
+		/// Recent Project Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentProjectTitle")]
+		public virtual string RecentProjectTitle => this.Value<string>(_publishedValueFallback, "recentProjectTitle");
+
+		///<summary>
 		/// Custom Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("customHeadline")]
 		public virtual string CustomHeadline => global::Umbraco.Cms.Web.Common.PublishedModels.ServiceListPage.GetCustomHeadline(this, _publishedValueFallback);
+
+		///<summary>
+		/// Layout
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("layout")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Layout => global::Umbraco.Cms.Web.Common.PublishedModels.ServiceListPage.GetLayout(this, _publishedValueFallback);
 
 		///<summary>
 		/// Page Title

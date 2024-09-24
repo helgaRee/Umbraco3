@@ -23,7 +23,8 @@
 
 .btn-submit {
     @include btn;
-    background-color: var(--color-secondary);
-
+    background-color: var(--color-submit);
+    border: var(--color-border-gray) !important;
+    margin-top: 1rem;
 }
 

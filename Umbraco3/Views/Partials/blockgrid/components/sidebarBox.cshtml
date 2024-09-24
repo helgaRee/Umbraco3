@@ -13,10 +13,11 @@
     var supportText = Model.Value<string>("supportText") ?? "";
     var inputEmail = Model.Value<string>("inputEmail");
 
-    var backgroundColorLabel = Model.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label;
-    var backgroundColorClass = !string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none" 
-        ? $"bg-{backgroundColorLabel}" 
-        : "";
+ 
+
+    var backgroundColorLabel = Model.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none") ? $"bg-{backgroundColorLabel}" : "";
+    
 
     var emailIcon = Model.Value<IPublishedContent>("emailIcon")?.Url() ?? "";
 
@@ -33,7 +34,7 @@
     </div>
 
     <div class="sidebar-support @backgroundColorClass">
-        <h5>@supportTitle</h5>
+        <h3>@supportTitle</h3>
         <p class="text">@supportText</p>
         <input type="email">
     </div>

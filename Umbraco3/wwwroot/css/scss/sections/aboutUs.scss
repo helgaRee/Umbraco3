@@ -2,15 +2,24 @@
 
 
     .container {
-        //padding-block: 9rem;
-        display: flex !important;
-        flex-direction: row !important;
+
 
         @include tablet {
             padding-block: 3rem;
         }
 
         @include desktop {
+        }
+
+        .dynamic-container {
+
+            @include tablet {
+                margin-left: 4rem;
+            }
+
+            @include desktop {
+                margin-left: 10rem;
+            }
         }
 
         .form-header {
@@ -22,7 +31,23 @@
 
         .input-item {
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
+
+            input {
+                padding: 0.3rem;
+                width: 100%;
+            }
+
+            padding: 0.3rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.3rem;
+        }
+
+        button {
+            width: 100%;
         }
 
         .content {

@@ -1,5 +1,5 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 @using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 
@@ -20,7 +20,7 @@
     var imgBack = settings?.Value<IPublishedContent>("imgBack")?.Url() ?? "";
     var imgFront = settings?.Value<IPublishedContent>("imgFront")?.Url() ?? "";
 
-    var backgroundColorLabel = Model.Value<ColorPickerValueConverter.PickedColor>("contactBackgroundColor")?.Label.ToLower() ?? null;
+    var backgroundColorLabel = Model.Content.Value<ColorPickerValueConverter.PickedColor>("contactBackgroundColor")?.Label.ToLower() ?? null;
     var backgroundColor = (!string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none") ? $"bg-{backgroundColorLabel}" : "";
    
 

@@ -12,7 +12,14 @@
     var errorMessage = Model.Content.Value<string>("errorMessage");
 
 
+
+
+
+
     bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+
+    bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
+
 }
 
 <div id="_@uniqueName" class="form-input-group">
@@ -23,12 +30,23 @@
 
     }
     <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["name"]">
-  
 
-
-        @if(string.IsNullOrEmpty(uniqueName)) {
+    <span class="form-input-error @(error_name ? "form-invalid-input" : "")">
+        @if (error_name)
+        {
             <span class="form-invalid-input">@errorMessage</span>
         }
+    </span>
+   
+@*      <span class="form-input-error @((error_name) ? "form-invalid-input": null)">Måste lägga in namn</span> *@
+
+
+@*@(isRequired?)
+
+        @if(string.IsNullOrEmpty(ViewData["name"]?.ToString())) {
+            <span class="form-invalid-input">@errorMessage</span>
+        }
+*@
 
 </div>
 

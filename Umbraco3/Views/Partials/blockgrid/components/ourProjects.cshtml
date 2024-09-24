@@ -1,0 +1,59 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+                    var sectionTitle = Model.Content.Value("sectionTitle") ?? "";
+                    var headline = Model.Content.Value("headline") ?? "";
+
+	var selection = Umbraco.Content(Guid.Parse("21449e10-7f77-4793-a45f-07fb927fe6e8"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible())
+    .Take(4);
+}
+@*
+<ul>
+	@foreach (var item in selection)
+	{
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+	}
+</ul>
+
+*@
+
+    <section id="recent-projects" class="recent-projects">
+        <div class="container">
+
+            <div class="headline">
+                <h5>@sectionTitle</h5>
+                <h2>@headline</h2>
+            </div>
+
+        <div class="content">
+            @if(selection != null) {
+                @foreach(var item in selection) 
+                {
+                    var image = item.Value<IPublishedContent>("recentProjectImage")?.Url();                   
+                    var imageDescription = item?.Value<string>("imageDescription") ?? "recent project";
+                    var footerTitle = item.Value<string>("recentProjectHeadline") ?? "";
+                    var subtitle = item.Value<string>("recentProjectSubtitle") ?? "";
+
+                <div class="item-container">
+                    <img src="@image" class="projects-image" />
+                    <a href="@item.Url()">
+                        <div class="item-footer">
+                            <h6>@footerTitle</h6>
+                            <p>@subtitle Financial Services</p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>                                                      
+                                        
+                }           
+            } 
+        </div>
+        </div>
+    </section>
+

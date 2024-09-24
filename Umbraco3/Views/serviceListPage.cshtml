@@ -1,5 +1,7 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ServiceListPage>;
+
 @{
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model.Value("pageTitle") ?? null;
@@ -53,6 +55,8 @@
 			</div>
 		</div>
 
+
+
                                                            @*PAGINATION*@
 		<section class="pagination">
 			<div class="container">
@@ -89,8 +93,8 @@
 
 	</div>
 </section>
+@await Html.GetBlockGridHtmlAsync(Model.Layout);
 
-@await Html.PartialAsync("partials/static/contact-component.cshtml");
 
 
 

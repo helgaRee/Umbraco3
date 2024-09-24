@@ -4,6 +4,7 @@
 @{
     var uniqueName = Model.Content.Value<string>("uniqueName") ?? "";
     var label = Model.Content.Value<string>("labelText") ?? "";
+    var hideLabel = Model.Content.Value<bool>("hideLabel");
     var placeholder = Model.Content.Value("placeholderText") ?? "";
     var list = Model.Content.Value<IEnumerable<string>>("inputType");
         
@@ -11,19 +12,26 @@
     var errorMessage = Model.Content.Value<string>("errorMessage");
 
 
+    bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+
+    bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
+
 }
 
-<div class="input-item">
-    <!-- <label for="@uniqueName">@label</label> -->
-    <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired">
-    
+<div id="_@uniqueName" class="input-item">
+    @if(!hideLabel) {
+        <label for="@uniqueName">@label</label>
+    } else {
+        <label for="@uniqueName"></label>
 
-    
-    @if(isRequired) {
-        <span>@errorMessage</span>
     }
+    <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["name"]">
+  
 
 
+        @if(string.IsNullOrEmpty(ViewData["name"]?.ToString())) {
+            <span class="form-invalid-input">@errorMessage</span>
+        }
 
 </div>
 

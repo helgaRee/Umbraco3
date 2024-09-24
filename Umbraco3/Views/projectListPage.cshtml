@@ -1,5 +1,7 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProjectsListPage>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
 @{
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model.Value("pageTitle") ?? null;
@@ -27,31 +29,6 @@
 	var keywords = Model.Value<IEnumerable<string>>("keywords");
 
 }
-
-
-@*
-<table style="font-size: 13px; line-height: 1.5em;">
-    <tr>
-        <td class="innerTD">
-            <div style="min-height:600px; width: 465px;">
-<div id="contentHeader">    
-    <h2><umbraco:Item runat="server" field="pageName"/>@asideTitle</h2>
-</div>
-
-                <form id="RunwayMasterForm" runat="server">
-                    <umbraco:Item runat="server" field="bodyText" />
-                </form>
-            </div>
-        </td>
-        <td style="width: 250px; padding: 8px;">
-            <umbraco:Item runat="server" field="sidebarText" />
-        </td>
-    </tr>
-</table>
-		
-
-*@
-
 
 
  <section class="our-projects">
@@ -136,6 +113,6 @@
 		</div>
     </div>
 </section> 
+@await Html.GetBlockGridHtmlAsync(Model.Layout);
 
-	@await Html.PartialAsync("partials/static/contact-component.cshtml");
 

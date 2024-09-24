@@ -1,22 +1,203 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProjectItemTemplate>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+
 @{
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model.Value("projectTitle") ?? null;
+
+	var headline = Model.Value<string>("recentProjectHeadline") ?? "";
+	var published = Model.Value<string>("recentProjectPublished") ?? "";
+	var image = Model.Value<IPublishedContent>("recentProjectImage")?.Url();
+	var sidebarRight = Model.Value<bool>("positionToTheRight");
+	var sidebarLeft = Model.Value<bool>("positionToTheLeft");
+
+	var keywords = Model.Value<IEnumerable<string>>("tagItems");
+
+	var asideTitle = Model.Value<string>("formHeadline") ?? "";
+	var bodyText = Model.Value<string>("formText") ?? "";
+	var headlineSupport = Model.Value<string>("formHeadline") ?? "";
+
+	var sidebarHeadline = Model.Value<string>("sidebarHeadline") ?? "";
+
+	var backgroundColorLabel = Model.Value<ColorPickerValueConverter.PickedColor>("backgroundColorSupport")?.Label.ToLower() ?? null;
+	var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none") ? $"bg-{backgroundColorLabel}" : "";
+
+	var selection = Umbraco.Content(Guid.Parse("21449e10-7f77-4793-a45f-07fb927fe6e8"))?
+    .ChildrenOfType("projectItemTemplate")?
+    .Where(x => x.IsVisible())
+	.Take(4);
+
+
 }
 
 
+@if(!sidebarLeft && !sidebarRight)
+{
+	<section class="project-details">
+		<div class="container">
+			<div class="page-content">
+				@Model.Value("pageContent");
+			</div>
+		</div>
+	</section>
+}
+else @if(sidebarLeft)
+{
+	<section class="project-details-with-sidebar-left">
+		<div class="container">
 
-<section class="project-details">
-	<div class="container">
-		@Model.Value("pageContent");
-	</div>
-</section>
+			<!-- PAGE CONTENT -->
+			<div class="page-content">
+				@Model.Value("pageContent");
+			</div>
+
+
+		<!-- SIDEBAR CONTENT LEFT -->
+			<div class="sidebar-content">
+				<h3>@sidebarHeadline</h3>
+
+
+
+		<!-- SIDEBAR PROJECTS -->
+				<div class="projects-content">
+
+					@if(selection != null) {
+
+				@foreach (var item in selection)
+				{		
+
+                    var recentImage = item.Value<IPublishedContent>("recentProjectImage")?.Url();                   
+                    var imageDescription = item?.Value<string>("imageDescription") ?? "recent project";
+                    var recentHeadline = item?.Value<string>("recentProjectHeadline") ?? "";
+                    var subtitle = item?.Value<string>("recentProjectSubtitle") ?? "";
+					var recentPublished = item?.Value<string>("recentProjectPublished") ?? "";
+
+
+					<div class="recent-project-item">
+						<a href="@item?.Url()">
+
+								<div class="item-img">
+									<img src="@recentImage" alt="@item?.Name()">
+								</div>
+
+								<div class="item-content">
+									<h4>@recentHeadline</h4>
+									<span class="published">@recentPublished</span>
+									<i class="fa-solid fa-arrow-right"></i>
+								</div>
+						</a>	
+					</div>		
+				}
+			}
+				</div>
+
+<!-- SIDEBAR TAGS -->
+				<div class="tag-content">
+				@if(keywords!.Any()) {
+						<h4>@asideTitle</h4>
+					<ul class="tag-list">
+						@foreach(var tag in keywords!) {
+							<li class="tag-item">@tag</li>
+						}
+					</ul>
+				}
+			</div>
+<!-- SIDEBAR SUPPORT -->
+			<div class="support-content @backgroundColorClass">
+				<h3>@headlineSupport</h3>
+				<p class="support-text">
+					@bodyText
+				</p>
+				<input type="email" placeholder="E-mail Address">
+			</div>
+
+			
+			</div>
+		</div>
+	</section>
+}
+
+else @if(sidebarRight)
+{
+	<section class="project-details-with-sidebar-right">
+		<div class="container">
+
+			<!-- PAGE CONTENT -->
+			<div class="page-content">
+				@Model.Value("pageContent");
+			</div>
+
+			<!-- SIDEBAR CONTENT RIGHT -->
+			<div class="sidebar-content">
+				<h2>@sidebarHeadline</h2>
+				
+
+			<!-- SIDEBAR PROJECTS -->
+				<div class="projects-content">
+
+					@if(selection != null) {
+
+				@foreach (var item in selection)
+				{		
+
+                    var recentImage = item.Value<IPublishedContent>("recentProjectImage")?.Url();                   
+                    var imageDescription = item?.Value<string>("imageDescription") ?? "recent project";
+                    var recentHeadline = item?.Value<string>("recentProjectHeadline") ?? "";
+                    var subtitle = item?.Value<string>("recentProjectSubtitle") ?? "";
+					var recentPublished = item?.Value<string>("recentProjectPublished") ?? "";
+
+
+					<div class="recent-project-item">
+						<a href="@item?.Url()">
+
+								<div class="item-img">
+									<img src="@recentImage" alt="@item?.Name()">
+								</div>
+
+								<div class="item-content">
+									<h4>@recentHeadline</h4>
+									<span class="published">@recentPublished</span>
+									<a href="@item?.Url()"><i class="fa-solid fa-arrow-right"></i></a>
+								</div>
+						</a>	
+					</div>		
+				}
+			}
+				</div>
 
 
 
 
 
+<!-- SIDEBAR TAGS -->
+				<div class="tag-content">
+				@if(keywords!.Any()) {
+						<h4>@asideTitle</h4>
+					<ul class="tag-list">
+						@foreach(var tag in keywords!) {
+							<li class="tag-item">@tag</li>
+						}
+					</ul>
+				}
+			</div>
+<!-- SIDEBAR SUPPORT -->
+			<div class="support-content @backgroundColorClass">
+				<h3>@headlineSupport</h3>
+				<p class="support-text">
+					@bodyText
+				</p>
+				<input type="email" placeholder="E-mail Address">
+			</div>
 
-	@await Html.PartialAsync("partials/static/contact-component.cshtml");
+			
+			</div>
+		</div>
+	</section>
+}
+@await Html.GetBlockGridHtmlAsync(Model.Layout);
+
+
+
 

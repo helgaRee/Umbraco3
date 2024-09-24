@@ -16,9 +16,13 @@ public class ContactSurfaceController : SurfaceController
 	{
 	}
 
+
+
 	[HttpPost]
-	public IActionResult HandleSubmit(ContactFormModel form)
+	public IActionResult HandleContactFormSubmit(ContactFormModel form)
 	{
+
+
 		//om modelstate inte är giltig, gör detta:
 		if (!ModelState.IsValid)
 		{
@@ -26,7 +30,7 @@ public class ContactSurfaceController : SurfaceController
 			ViewData["name"] = form.Name;
 			ViewData["email"] = form.Email;
 			ViewData["phone"] = form.Phone;
-			ViewData["optionsList"] = form.OptionsList;
+
 
 			ViewData["error_name"] = string.IsNullOrEmpty(form.Name);
 			ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
@@ -38,7 +42,7 @@ public class ContactSurfaceController : SurfaceController
 
 		//annars...
 		//om lyckas, returnera till nuvarande sida, uppdaterar sidan. Redirect...
-		ViewData["success"] = "Form was submitted successfully.";
+		TempData["success"] = "Contactform was submitted successfully.";
 		return RedirectToCurrentUmbracoPage();
 	}
 
@@ -46,6 +50,8 @@ public class ContactSurfaceController : SurfaceController
 	[HttpPost]
 	public IActionResult HandleQuestionFormSubmit(QuestionFormModel form)
 	{
+
+
 		if (!ModelState.IsValid)
 		{
 			ViewData["name"] = form.Name;
@@ -56,9 +62,12 @@ public class ContactSurfaceController : SurfaceController
 			ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
 			ViewData["error_message"] = string.IsNullOrEmpty(form.Message);
 
+			ViewData["form_submitted"] = true;
+
 			return CurrentUmbracoPage();
 		}
-		TempData["success"] = "Form was submitted successfully.";
+
+		TempData["success"] = "QuestionForm was submitted successfully.";
 		return RedirectToCurrentUmbracoPage();
 	}
 }

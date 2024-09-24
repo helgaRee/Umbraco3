@@ -1,0 +1,64 @@
+.service-details {
+    .container {
+        //display: grid;
+        //grid-template-columns: 1fr auto;
+        //grid-template-rows: auto auto auto;
+        //grid-template-areas:
+        //    'aside content' 'content content' 'form form';
+
+        .flex {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 3rem;
+            padding-top: 3rem;
+
+            .page-content {
+                padding-top: 1.5rem;
+            }
+
+            aside {
+                border-right: 1px solid var(--color-gray);
+                padding-right: 3rem;
+
+                .sidebar-info {
+                }
+
+                .sidebar-support {
+                }
+
+                .sidebar-tags {
+                }
+            }
+        }
+
+
+        form {
+            grid-area: form;
+
+
+            .form-input-group {
+                display: flex;
+                flex-direction: column-reverse;
+
+                label {
+                }
+
+                input {
+                    padding: 0.5rem;
+                }
+
+                .form-textarea {
+                    height: 150px;
+                }
+
+                span {
+                }
+            }
+
+            .form-button {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Project Item Template</summary>
 	[PublishedModel("projectItemTemplate")]
-	public partial class ProjectItemTemplate : PublishedContentModel
+	public partial class ProjectItemTemplate : PublishedContentModel, IOurProjects, ISidebarItem
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -58,12 +58,34 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops CalenderIcon => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "calenderIcon");
 
 		///<summary>
+		/// Layout
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("layout")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Layout => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "layout");
+
+		///<summary>
 		/// Page Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("pageContent")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString PageContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "pageContent");
+
+		///<summary>
+		/// Position To The Left
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[ImplementPropertyType("positionToTheLeft")]
+		public virtual bool PositionToTheLeft => this.Value<bool>(_publishedValueFallback, "positionToTheLeft");
+
+		///<summary>
+		/// Position To The Right
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[ImplementPropertyType("positionToTheRight")]
+		public virtual bool PositionToTheRight => this.Value<bool>(_publishedValueFallback, "positionToTheRight");
 
 		///<summary>
 		/// Project Link
@@ -112,5 +134,180 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("projectTitle")]
 		public virtual string ProjectTitle => this.Value<string>(_publishedValueFallback, "projectTitle");
+
+		///<summary>
+		/// Button Link Text: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("buttonLinkText")]
+		public virtual string ButtonLinkText => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetButtonLinkText(this, _publishedValueFallback);
+
+		///<summary>
+		/// Footer Background Color: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("footerBackgroundColor")]
+		public virtual global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor FooterBackgroundColor => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetFooterBackgroundColor(this, _publishedValueFallback);
+
+		///<summary>
+		/// Footer Subtitle: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("footerSubtitle")]
+		public virtual string FooterSubtitle => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetFooterSubtitle(this, _publishedValueFallback);
+
+		///<summary>
+		/// Footer Title: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("footerTitle")]
+		public virtual string FooterTitle => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetFooterTitle(this, _publishedValueFallback);
+
+		///<summary>
+		/// Headline: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headline")]
+		public virtual string Headline => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetHeadline(this, _publishedValueFallback);
+
+		///<summary>
+		/// Image Description: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("imageDescription")]
+		public virtual string ImageDescription => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetImageDescription(this, _publishedValueFallback);
+
+		///<summary>
+		/// IsExternal: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[ImplementPropertyType("isExternal")]
+		public virtual bool IsExternal => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetIsExternal(this, _publishedValueFallback);
+
+		///<summary>
+		/// Project Image: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("projectImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ProjectImage => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetProjectImage(this, _publishedValueFallback);
+
+		///<summary>
+		/// Section Title: Our Projects
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sectionTitle")]
+		public virtual string SectionTitle => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetSectionTitle(this, _publishedValueFallback);
+
+		///<summary>
+		/// Sidebar Item
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sidebarItem")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel SidebarItem => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetSidebarItem(this, _publishedValueFallback);
+
+		///<summary>
+		/// Background Color Support
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("backgroundColorSupport")]
+		public virtual global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor BackgroundColorSupport => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetBackgroundColorSupport(this, _publishedValueFallback);
+
+		///<summary>
+		/// Form Email Input
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("formEmailInput")]
+		public virtual string FormEmailInput => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetFormEmailInput(this, _publishedValueFallback);
+
+		///<summary>
+		/// Form Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("formHeadline")]
+		public virtual string FormHeadline => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetFormHeadline(this, _publishedValueFallback);
+
+		///<summary>
+		/// Form Text
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("formText")]
+		public virtual string FormText => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetFormText(this, _publishedValueFallback);
+
+		///<summary>
+		/// Recent Project Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentProjectHeadline")]
+		public virtual string RecentProjectHeadline => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectHeadline(this, _publishedValueFallback);
+
+		///<summary>
+		/// Recent Project Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentProjectImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops RecentProjectImage => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectImage(this, _publishedValueFallback);
+
+		///<summary>
+		/// Recent Project Published
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentProjectPublished")]
+		public virtual string RecentProjectPublished => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectPublished(this, _publishedValueFallback);
+
+		///<summary>
+		/// Recent Project Subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("recentProjectSubtitle")]
+		public virtual string RecentProjectSubtitle => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectSubtitle(this, _publishedValueFallback);
+
+		///<summary>
+		/// Sidebar Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sidebarHeadline")]
+		public virtual string SidebarHeadline => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetSidebarHeadline(this, _publishedValueFallback);
+
+		///<summary>
+		/// Sidebar Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sidebarImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops SidebarImage => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetSidebarImage(this, _publishedValueFallback);
+
+		///<summary>
+		/// Sidebar Text
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sidebarText")]
+		public virtual string SidebarText => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetSidebarText(this, _publishedValueFallback);
+
+		///<summary>
+		/// Tag Items
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("tagItems")]
+		public virtual global::System.Collections.Generic.IEnumerable<string> TagItems => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetTagItems(this, _publishedValueFallback);
 	}
 }

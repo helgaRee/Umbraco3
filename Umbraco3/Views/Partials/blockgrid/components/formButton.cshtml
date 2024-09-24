@@ -3,7 +3,7 @@
 
 @{
     var buttonText = Model.Content.Value<string>("buttonText");
-    var buttonType = Model.Content.Value("buttonType");
+    var buttonType = Model.Content.Value<IEnumerable<string>>("buttonType");
     var border = (Model.Content.Value<bool>("withBorder")) ? "borderClass" : "";
 }
 

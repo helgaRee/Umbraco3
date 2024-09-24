@@ -7,10 +7,21 @@
     var headline = Model.Value<string>("sidebarHeadline") ?? "";
     var image = Model.Value<IPublishedContent>.("sidebarImage")?.Url() ?? null;
     var text = Model.Value<string>("sidebarText") ?? "";
+
+    var projectImage = Model.Value<IPublishedContent>("recentProjectImage") ?? "";
+    var projectHeadline = Model.Value<string>("recentProjectHeadline") ?? "";
+    var projectPublished = Model.Value<string>("projectPublished") ?? "";
 }
 
 <aside>
     <h5>@headline</h5>
     <img src="@image" />
     <p class="text"></p>
+
+        <h4>@projectHeadline</h4>
+    <img src="@projectImage" />
+    <p class="text">@projectPublished</p>
+
+
+
 </aside>

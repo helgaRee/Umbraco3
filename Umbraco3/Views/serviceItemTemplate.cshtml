@@ -1,12 +1,10 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ServiceItemTemplate>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ServiceItemTemplate>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
 
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model.Value("pageTitle") ?? null;
-
-
 
 	//Mappar fälten för ERROR
 	//kontrollerar om det finns ett bool värde
@@ -15,22 +13,24 @@
 	bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
 	bool.TryParse(ViewData["error_message"]?.ToString()!, out bool error_message);
 
+	// Kontrollera om formuläret har skickats
+	bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
 
-
-@*
-var aboutPage = Model.AncestorsOrSelf().FirstOrDefault(x => x.ContentType.Alias == "aboutPage") ?? null;
-var membersList = aboutPage?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("membersList") ?? null;
-var serviceItemPage = Model.AncestorsOrSelf().FirstOrDefault(x => x.ContentType.Alias == "serviceItemTemplate") ?? null;
-var sidebarHeadline = Model?.Value<string>("sidebarHeadline") ?? "";
-var formHeadline = Model.Value<string>("formHeadline") ?? "";
-var tags = Model?.Value<IEnumerable<string>>("tags");
-*@
 
 }
+
 <section class="service-details">
 	<div class="container">
-		@Model?.Value("pageContent")
-		@await Html.PartialAsync("Blockgrid/components/sidebarBox", Model)
+
+		<div class="flex">
+			<div class="page-content">
+				@Model?.Value("pageContent")
+
+			</div>
+			@await Html.PartialAsync("Blockgrid/components/sidebarBox", Model)
+
+
+		</div>
 
 
 			@if(TempData["success"] != null)
@@ -50,6 +50,8 @@ var tags = Model?.Value<IEnumerable<string>>("tags");
 
 	</div>
 </section>
+
+@await Html.GetBlockGridHtmlAsync(Model!.Layout);
 
 
 
