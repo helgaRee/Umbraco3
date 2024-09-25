@@ -207,14 +207,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string SectionTitle => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetSectionTitle(this, _publishedValueFallback);
 
 		///<summary>
-		/// Sidebar Item
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("sidebarItem")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel SidebarItem => global::Umbraco.Cms.Web.Common.PublishedModels.OurProjects.GetSidebarItem(this, _publishedValueFallback);
-
-		///<summary>
 		/// Background Color Support
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]

@@ -10,16 +10,15 @@
 	var formHeadline = Model.Value<string>("formHeadline") ?? "";
 	var preamble = Model.Value<string>("formPreamble") ?? "";
 
-
-
 	var isRequired = Model.Value<bool>("isRequired");
-
 	var errorMessage = Model.Value<string>("errorMessage");
 
-
-
-
-
+	var uniqueName = Model.Value<string>("uniqueName") ?? "";
+	var label = Model.Value<string>("labelText") ?? "";
+	var hideLabel = Model.Value<bool>("hideLabel");
+	var placeholder = Model.Value("placeholderText") ?? "";
+	var type = Model.Value<IEnumerable<string>>("inputType");
+	var multipleChoiceList = Model.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
 
 
 	bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
@@ -32,36 +31,40 @@
 }
 
 
-@*@await Html.PartialAsync("partials/static/contact-component.cshtml")*@
 @await Html.GetBlockGridHtmlAsync(Model.Layout)
-@*
-<container>
-	<form onsubmit="handleContactFormSubmit(event)" novalidate>
-		<!-- Blocklist-formuläret renderas ut -->
-		@Html.GetBlockListHtml(Model.ContactForm);
-	</form>
-</container>
 
-*@
 <section class="contact-form">
-
 	<div class="container">
-	
-	<div class="headline">
-		<h4>@formTitle</h4>
-		<h2>@formHeadline</h2>
-		<p>@preamble</p>
-	</div>
+		<div class="headline">
+			<h4>@formTitle</h4>
+			<h2>@formHeadline</h2>
+			<p>@preamble</p>
+		</div>
+
+		@if (TempData["success"] != null)
+		{
+			<div class="success-message">@TempData["success"]</div>
+		}
+		else
+		{
+			@using (Html.BeginUmbracoForm("HandleContactFormSubmit", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate"})) 
+			{
+				@Html.GetBlockListHtml(Model?.ContactForm); 
+			}
+		} 
 
 
-		@using (Html.BeginUmbracoForm("HandleContactFormSubmit", "ContactSurface", FormMethod.Post))
+
+
+
+
+
+@* 		@using (Html.BeginUmbracoForm("HandleContactFormSubmit", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
+
 		{
 			<div class="form-input-group">
 				<label for="name" class="form-label"></label>
 				<input id="name" name="name" type="text" placeholder="Enter your name" class="form-input" required="@isRequired" value="@ViewData["name"]" />
-@* 				<span class="form-input-error @((error_name) ? "form-invalid-input": null)">Måste lägga in namn</span> *@
-
-
 				<span class="form-input-error @(error_name ? "form-invalid-input" : "")">
 					@if (error_name)
 					{
@@ -74,7 +77,7 @@
 			<div class="form-input-group">
 				<label for="phone" class="form-label"></label>
 				<input id="phone" name="phone" type="text" placeholder="Enter your number" class="form-input" required="@isRequired" value="@ViewData["phone"]" />
-@* 				<span class="form-input-error @((error_phone) ? "form-invalid-input": null)">Måste lägga in namn</span> *@
+
 
 				<span class="form-input-error @(error_phone ? "form-invalid-input" : "")">
 					@if (error_phone)
@@ -87,7 +90,6 @@
 			<div class="form-input-group">
 				<label for="email" class="form-label"></label>
 				<input id="email" name="email" type="email" placeholder="Enter your email" class="form-input" required="@isRequired" value="@ViewData["email"]" />
-@* 				<span class="form-input-error @((error_email) ? "form-invalid-input": null)">Måste lägga in namn</span> *@
 
 				<span class="form-input-error @(error_email ? "form-invalid-input" : "")">
 					@if (error_email)
@@ -101,14 +103,38 @@
 				<label for="" class="form-label"></label>
 				<input id="list" name="list" type="text" placeholder="Financial consulting" class="form-input" />
 			</div>
+
+
+
+			<div id="_@uniqueName" class="input-item">
+				@if (!hideLabel)
+				{
+					<label for="@uniqueName">@label</label>
+				}
+				else
+				{
+					<label for="@uniqueName"></label>
+
+				}
+				@if (multipleChoiceList.Any())
+				{
+					<select>
+						@foreach (var option in multipleChoiceList)
+						{
+							<option value="@option">@option</option>
+						}
+					</select>
+				}
+				else
+				{
+					<p>No options available</p>
+				}
+
+			</div>
 			<button type="submit" class="form-button btn btn-primary">Submit</button>
-		}
+		} *@
 
-		@if(TempData["success"] == null)
-		{
-			<div class="sussess-message">@TempData["success"]</div>
 
-		}
 
 
 </div>

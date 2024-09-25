@@ -2,13 +2,12 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 
-@
-{
+@{
     var headline = Model.Value<string>("sidebarHeadline") ?? "";
-    var image = Model.Value<IPublishedContent>.("sidebarImage")?.Url() ?? null;
+    var image = Model.Value<IPublishedContent>("sidebarImage")?.Url() ?? null;
     var text = Model.Value<string>("sidebarText") ?? "";
 
-    var projectImage = Model.Value<IPublishedContent>("recentProjectImage") ?? "";
+    var projectImage = Model.Value<IPublishedContent>("recentProjectImage")?.Url() ?? null;
     var projectHeadline = Model.Value<string>("recentProjectHeadline") ?? "";
     var projectPublished = Model.Value<string>("projectPublished") ?? "";
 }

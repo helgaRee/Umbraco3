@@ -2,28 +2,46 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 @{
+    var uniqueName = Model.Content.Value<string>("uniqueName") ?? "";
+    var label = Model.Content.Value<string>("labelText") ?? "";
+    var hideLabel = Model.Content.Value<bool>("hideLabel");
+    var placeholder = Model.Content.Value<string>("placeholderText") ?? "";
+
+    var isRequired = Model.Content.Value<bool>("isRequired");
+    var errorMessage = Model.Content.Value<string>("errorMessage") ?? "";
+
+
+    // Kontrollera om formuläret har skickats
+    bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
     
     var multipleChoiceList = Model.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
 
 
 }
 
-@if(multipleChoiceList.Any())
-{
-    <select>
-        @foreach (var option in multipleChoiceList)
-        {
-            <option value="@option">@option</option>
-        }
-    </select>
-}
-else {
-      <p>No options available</p>
-}
+<div id="_@uniqueName" class="form-input-group">
+    @if (!hideLabel)
+    {
+        <label for="@uniqueName">@label</label>
+    }
+    else
+    {
+        <label for="@uniqueName"></label>
 
+    }
+    @if (multipleChoiceList.Any())
+    {
+        <select>
+            @foreach (var option in multipleChoiceList)
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    }
+    else
+    {
+        <p>No options available</p>
+    }
 
-
-
-
-
+</div>
 

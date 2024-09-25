@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 @{
@@ -10,12 +10,13 @@
     var isRequired = Model.Content.Value<bool>("isRequired");
     var errorMessage = Model.Content.Value<string>("errorMessage") ?? "";
 
-    bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+    bool.TryParse(ViewData["error_phone"]?.ToString()!, out bool error_phone);
     // Kontrollera om formuläret har skickats
     bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
 }
 
-<div id="_@uniqueName" class="input-item">
+
+<div id="_@uniqueName" class="form-input-group">
     @if(!hideLabel) {
         <label for="@uniqueName">@label</label>
     } else {
@@ -25,8 +26,10 @@
     <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["phone"]">
     
 
-    @if(string.IsNullOrEmpty(ViewData["phone"]?.ToString()))
-    {
-        <span class="form-invalid-input">@errorMessage</span> 
-    }
+    <span class="form-input-error @(error_phone ? "form-invalid-input" : "")">
+        @if (error_phone)
+        {
+            <span class="form-invalid-input">@errorMessage</span>
+        }
+    </span>
 </div>

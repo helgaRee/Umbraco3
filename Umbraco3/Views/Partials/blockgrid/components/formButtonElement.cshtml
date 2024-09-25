@@ -3,10 +3,15 @@
 
 @{
     var buttonText = Model.Content.Value<string>("buttonText");
-    var buttonType = Model.Content.Value<IEnumerable<string>>("buttonType");
+    var buttonType = Model.Content.Value<IEnumerable<string>>("buttonSubmit");
+            @*var buttonType = Model.Content.Value<IEnumerable<string>>("buttonType");*@
     var border = (Model.Content.Value<bool>("withBorder")) ? "borderClass" : "";
 }
 
 <div>
-    <button type="@buttonType" class="btn-submit @border">@buttonText</button>
+    <button type="@buttonType" class="form-button btn btn-primary">@buttonText</button>
 </div>
+
+
+
+

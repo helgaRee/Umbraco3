@@ -100,3 +100,11 @@ footer {
 .form-input-error {
 
 }
+
+.success-message {
+    background-color: var(--color-submit);
+    border-radius: 10px 10px;
+    border: 1px solid var(--color-border-primary);
+    padding: 0.3rem;
+    text-align: center;
+}

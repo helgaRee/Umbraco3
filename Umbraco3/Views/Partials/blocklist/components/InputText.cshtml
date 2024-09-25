@@ -12,12 +12,7 @@
     var errorMessage = Model.Content.Value<string>("errorMessage");
 
 
-
-
-
-
     bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
-
     bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
 
 }

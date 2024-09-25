@@ -3,10 +3,10 @@
 
 @{
     var buttonText = Model.Content.Value<string>("buttonText");
-    var buttonType = Model.Content.Value<IEnumerable<string>>("buttonType");
+    var buttonType = Model.Content.Value<IEnumerable<string>>("buttonSubmit");
 
 }
 
-    <button type="@buttonType" class="form-button btn btn-primary">@buttonText</button>
+    <button type="@buttonType" class="form-button btn btn-primary">@buttonText formButtonElement</button>
 
 

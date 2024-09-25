@@ -12,10 +12,6 @@
 
 
 
-
-
-
-
     bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
     // Kontrollera om formuläret har skickats
     bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
@@ -37,8 +33,6 @@
             <span class="form-invalid-input">@errorMessage</span>
         }
     </span>
-@* 
-    <span class="form-input-error @((error_email) ? "form-invalid-input": null)">Måste lägga in namn</span> *@
-    
+
 
 </div>

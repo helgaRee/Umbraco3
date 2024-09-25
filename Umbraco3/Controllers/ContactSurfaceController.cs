@@ -26,7 +26,7 @@ public class ContactSurfaceController : SurfaceController
 		//om modelstate inte är giltig, gör detta:
 		if (!ModelState.IsValid)
 		{
-			//är modellen ogiltig? sätter temp varables och mappar in värden
+			//är modellen ogiltig? sätter temp/view varables och mappar in värden
 			ViewData["name"] = form.Name;
 			ViewData["email"] = form.Email;
 			ViewData["phone"] = form.Phone;
@@ -36,6 +36,7 @@ public class ContactSurfaceController : SurfaceController
 			ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
 			ViewData["error_phone"] = string.IsNullOrEmpty(form.Phone);
 
+			ViewData["form_submitted"] = true;
 
 			return CurrentUmbracoPage();
 		}
@@ -67,7 +68,46 @@ public class ContactSurfaceController : SurfaceController
 			return CurrentUmbracoPage();
 		}
 
-		TempData["success"] = "QuestionForm was submitted successfully.";
+		TempData["success"] = "Your question was submitted successfully.";
+		return RedirectToCurrentUmbracoPage();
+	}
+
+
+
+
+
+	[HttpPost]
+	public IActionResult HandleHomePageFormSubmit(HomepageFormModel form)
+	{
+		if (!ModelState.IsValid)
+		{
+			ViewData["name"] = form.Name;
+			ViewData["phone"] = form.Phone;
+			ViewData["email"] = form.Email;
+
+
+
+			if (string.IsNullOrEmpty(form.Name))
+			{
+				ViewData["error_name"] = ModelState["name"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your name!";
+			}
+			if (string.IsNullOrEmpty(form.Phone))
+			{
+				ViewData["error_phone"] = ModelState["phone"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your number!";
+			}
+			if (string.IsNullOrEmpty(form.Email))
+			{
+				ViewData["error_email"] = ModelState["email"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your Email!";
+			}
+
+
+			ViewData["form_submitted"] = true;
+
+			return CurrentUmbracoPage();
+
+		}
+
+		TempData["success"] = "ContactForm was submitted successfully.";
 		return RedirectToCurrentUmbracoPage();
 	}
 }

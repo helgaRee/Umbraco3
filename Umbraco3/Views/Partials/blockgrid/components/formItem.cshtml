@@ -4,46 +4,179 @@
 
 
 @{
+
+	@*
     var uniqueName = Model.Content.Value<string>("uniqueName") ?? "";
     var label = Model.Content.Value<string>("labelText") ?? "";
     var hideLabel = Model.Content.Value<bool>("hideLabel");
     var placeholder = Model.Content.Value("placeholderText") ?? "";
     var type = Model.Content.Value<IEnumerable<string>>("inputType");
-        
-    var isRequired = Model.Content.Value<bool>("isRequired");
-    var errorMessage = Model.Content.Value<string>("errorMessage");
+	var multipleChoiceList = Model.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
+
+*@
+
+
+
+	var formInputs = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("formHomePage");
+	var errorMessage = Model.Content.Value<string>("errorMessage");
+	var buttonText = Model.Content.Value<string>("buttonText") ?? "Submit";
+	var type = Model.Content.Value<IEnumerable<string>>("inputType");
+
+	bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+	bool.TryParse(ViewData["error_phone"]?.ToString()!, out bool error_phone);
+	bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+
+	// Ta emot data från ViewData
+	var name = ViewData["name"]?.ToString();
+	var phone = ViewData["phone"]?.ToString();
+	var email = ViewData["email"]?.ToString();
+
+	// Kontrollera om formuläret har skickats
+	bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
+
 }
-	
-	@using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+<section>
+
+	<div>
+
+@if(TempData["success"] != null) {
+	<div class="success-message">@TempData["success"]</div>
+}
+
+else
+{
+	@using (Html.BeginUmbracoForm("HandleHomePageFormSubmit", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate" }))
 	{
-		<div class="form-input-group">
-			<label for="name" class="form-label">@label</label>
-			<input id="name" name="name" type="text" placeholder="@placeholder" class="form-input" required="@isRequired" />
-			
-			@if(isRequired) {
-				<span class="form-input-error">@errorMessage</span>
-			}
-		</div>
-		<div class="form-input-group">
-			<label for="phone" class="form-label">@label</label>
-			<input id="phone" name="phone" type="text" placeholder="@placeholder" class="form-input" required="@isRequired" />
-			@if(isRequired) {
-				<span class="form-input-error">@errorMessage</span>
-			}
-		</div>
-		<div class="form-input-group">
-			<label for="email" class="form-label">@label</label>
-			<input id="email" name="email" type="email" placeholder="@placeholder" class="form-input" required="@isRequired" />
-			@if(isRequired) {
-				<span class="form-input-error">@errorMessage</span>
-			}
-		</div>
-			<div class="form-input-group">
-			<label for="" class="form-label">@label</label>
-			<input id="list" name="list" type="text" placeholder="@placeholder" class="form-input" required="@isRequired" />
-			@if(isRequired) {
-				<span class="form-input-error">@errorMessage</span>
-			}
-		</div>
-		<button type="@type" class="form-button btn btn-submit">Submit</button>
+		@foreach (var input in formInputs!)
+		{
+			var uniqueName = input.Content.Value<string>("uniqueName") ?? "";
+			var label = input.Content.Value<string>("labelText") ?? "";
+			var hideLabel = input.Content.Value<bool>("hideLabel");
+			var placeholder = input.Content.Value<string>("placeholderText") ?? "";
+			var multipleChoiceList = input.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
+			var isRequired = input.Content.Value<bool>("isRequired"); // Lägg till denna rad om den behövs
+
+			<div id="_@uniqueName" class="input-item">
+				@if (!hideLabel)
+				{
+					<label for="@uniqueName">@label</label>
+				}
+
+				@if (multipleChoiceList.Any())
+				{
+					<select id="@uniqueName" name="@uniqueName" required="@isRequired">
+						<option value="">-- Select an option --</option>
+						@foreach (var option in multipleChoiceList)
+						{
+							<option value="@option">@option</option>
+						}
+					</select>
+				}
+				else
+				{
+					<input type="text" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData[uniqueName]" />
+				}
+
+
+				@if (!string.IsNullOrEmpty(ViewData[$"error_{uniqueName}"]?.ToString()))
+				{
+				<span class="form-input-error form-invalid-input">@ViewData[$"error_{uniqueName}"]</span>
+				}
+			</div>
+		}
+		<button type="submit" class="form-button btn btn-primary">@buttonText</button>
 	}
+	
+}
+
+
+
+
+	</div>
+
+</section>
+
+
+@*
+
+	<div id="_@uniqueName" class="input-item">
+		@if (!hideLabel)
+		{
+			<label for="@uniqueName">@label</label>
+		}
+		else
+		{
+			<label for="@uniqueName"></label>
+
+		}
+		<input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["phone"]">
+
+
+		@if (string.IsNullOrEmpty(ViewData["phone"]?.ToString()))
+		{
+			<span class="form-invalid-input">@errorMessage</span>
+		}
+	</div>
+
+
+
+
+
+	<div id="_@uniqueName" class="input-item">
+		@if (!hideLabel)
+		{
+			<label for="@uniqueName">@label</label>
+		}
+		else
+		{
+			<label for="@uniqueName"></label>
+
+		}
+		<input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["email"]">
+
+
+		@if (string.IsNullOrEmpty(ViewData["email"]?.ToString()))
+		{
+			<span class="form-invalid-input">@errorMessage</span>
+		}
+
+
+	</div>
+
+
+	<div id="_@uniqueName" class="form-input-group">
+		@if (!hideLabel)
+		{
+			<label for="@uniqueName">@label</label>
+		}
+		else
+		{
+			<label for="@uniqueName"></label>
+
+		}
+		@if (multipleChoiceList.Any())
+		{
+			<select>
+				@foreach (var option in multipleChoiceList)
+				{
+					<option value="@option">@option</option>
+				}
+			</select>
+		}
+		else
+		{
+			<p>No options available</p>
+		}
+
+	</div>
+	
+		<button type="submit" class="form-button btn btn-primary">Submit</button>
+*@
+
+
+
+
+
+
+
+

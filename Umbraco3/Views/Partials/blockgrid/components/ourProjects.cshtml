@@ -6,8 +6,8 @@
                     var sectionTitle = Model.Content.Value("sectionTitle") ?? "";
                     var headline = Model.Content.Value("headline") ?? "";
 
-	var selection = Umbraco.Content(Guid.Parse("21449e10-7f77-4793-a45f-07fb927fe6e8"))
-    .ChildrenOfType("projectItemTemplate")
+	var selection = Umbraco.Content(Guid.Parse("21449e10-7f77-4793-a45f-07fb927fe6e8"))?
+    .ChildrenOfType("projectItemTemplate")?
     .Where(x => x.IsVisible())
     .Take(4);
 }
@@ -37,12 +37,12 @@
                 {
                     var image = item.Value<IPublishedContent>("recentProjectImage")?.Url();                   
                     var imageDescription = item?.Value<string>("imageDescription") ?? "recent project";
-                    var footerTitle = item.Value<string>("recentProjectHeadline") ?? "";
-                    var subtitle = item.Value<string>("recentProjectSubtitle") ?? "";
+                    var footerTitle = item!.Value<string>("recentProjectHeadline") ?? "";
+                    var subtitle = item!.Value<string>("recentProjectSubtitle") ?? "";
 
                 <div class="item-container">
                     <img src="@image" class="projects-image" />
-                    <a href="@item.Url()">
+                    <a href="@item!.Url()">
                         <div class="item-footer">
                             <h6>@footerTitle</h6>
                             <p>@subtitle Financial Services</p>
