@@ -14,8 +14,8 @@
 	var sidebarLeft = Model.Value<bool>("positionToTheLeft");
 
 	var keywords = Model.Value<IEnumerable<string>>("tagItems");
+	var tagTitle = Model.Value<string>("tagTitle") ?? "";
 
-	var asideTitle = Model.Value<string>("formHeadline") ?? "";
 	var bodyText = Model.Value<string>("formText") ?? "";
 	var headlineSupport = Model.Value<string>("formHeadline") ?? "";
 
@@ -38,7 +38,7 @@
 	<section class="project-details">
 		<div class="container">
 			<div class="page-content">
-				@Model.Value("pageContent");
+				@Model.Value("pageContent")
 			</div>
 		</div>
 	</section>
@@ -50,7 +50,7 @@ else @if(sidebarLeft)
 
 			<!-- PAGE CONTENT -->
 			<div class="page-content">
-				@Model.Value("pageContent");
+				@Model.Value("pageContent")
 			</div>
 
 
@@ -96,7 +96,7 @@ else @if(sidebarLeft)
 <!-- SIDEBAR TAGS -->
 				<div class="tag-content">
 				@if(keywords!.Any()) {
-						<h4>@asideTitle</h4>
+						<h4>@tagTitle</h4>
 					<ul class="tag-list">
 						@foreach(var tag in keywords!) {
 							<li class="tag-item">@tag</li>
@@ -126,7 +126,7 @@ else @if(sidebarRight)
 
 			<!-- PAGE CONTENT -->
 			<div class="page-content">
-				@Model.Value("pageContent");
+				@Model.Value("pageContent")
 			</div>
 
 			<!-- SIDEBAR CONTENT RIGHT -->
@@ -157,7 +157,7 @@ else @if(sidebarRight)
 								</div>
 
 								<div class="item-content">
-									<h4>@recentHeadline</h4>
+									 <h4>@recentHeadline</h4> 
 									<span class="published">@recentPublished</span>
 									<i class="fa-solid fa-arrow-right"></i>
 								</div>
@@ -174,7 +174,7 @@ else @if(sidebarRight)
 <!-- SIDEBAR TAGS -->
 				<div class="tag-content">
 				@if(keywords!.Any()) {
-						<h4>@asideTitle</h4>
+						<h4>@tagTitle</h4>
 					<ul class="tag-list">
 						@foreach(var tag in keywords!) {
 							<li class="tag-item">@tag</li>

@@ -931,57 +931,28 @@ header .navbar .container .btn-menu {
     margin-left: 5rem;
   }
 }
-#great-reviews {
-  padding-block: 3rem;
+#reviews {
+  padding-block: 2rem;
+  text-align: center;
 }
-#great-reviews .content {
-  padding-inline: 1rem;
+#reviews .container h5 {
+  margin-left: 1rem;
 }
-#great-reviews img {
+#reviews .container img {
   padding: 1rem;
-}
-@media (min-width: 768px) {
-  #great-reviews {
-    padding-block: 3rem;
-  }
-  #great-reviews .content {
-    width: 90%;
-    margin: auto;
-  }
-  #great-reviews img {
-    padding: 3rem;
-  }
-  #great-reviews h3, #great-reviews h2, #great-reviews p {
-    padding-left: 2rem;
-  }
-}
-@media (min-width: 1400px) {
-  #great-reviews {
-    padding-block: 3rem;
-  }
-  #great-reviews .content {
-    width: 64%;
-    margin: auto;
-    padding-block: 2rem;
-  }
-  #great-reviews img {
-    padding: 3rem;
-  }
-  #great-reviews h3, #great-reviews h2, #great-reviews p {
-    padding-left: 2rem;
-  }
+  margin: auto;
 }
 @media (min-width: 1920px) {
-  #great-reviews {
+  #reviews {
     padding-block: 3rem;
   }
-  #great-reviews .content {
+  #reviews .container .content {
     margin-top: 7rem;
   }
-  #great-reviews img {
+  #reviews .container img {
     width: fit-content;
   }
-  #great-reviews h3, #great-reviews h2, #great-reviews p {
+  #reviews .container h3, #reviews .container h2, #reviews .container p {
     padding-left: 2rem;
   }
 }
@@ -1283,7 +1254,7 @@ header .navbar .container .btn-menu {
   text-align: center;
 }
 .project-details-with-sidebar-left .container .sidebar-content h3 {
-  color: var(--color-primary);
+  color: var(--color-accent);
 }
 @media (min-width: 768px) {
   .project-details-with-sidebar-left .container .sidebar-content .projects-content {

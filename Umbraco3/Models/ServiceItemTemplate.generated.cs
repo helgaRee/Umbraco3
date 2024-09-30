@@ -186,6 +186,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::System.Collections.Generic.IEnumerable<string> Tags => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarBox.GetTags(this, _publishedValueFallback);
 
 		///<summary>
+		/// Tag Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("tagTitle")]
+		public virtual string TagTitle => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarBox.GetTagTitle(this, _publishedValueFallback);
+
+		///<summary>
 		/// With Border
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]

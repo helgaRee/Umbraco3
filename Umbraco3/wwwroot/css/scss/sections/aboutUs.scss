@@ -122,35 +122,72 @@
 }
 
 
-#great-reviews {
-    padding-block: 3rem;
+#reviews {
+    padding-block: 2rem;
+    text-align: center;
 
-    .content {
-        padding-inline: 1rem;
-    }
+    .container {
 
-    img {
-        padding: 1rem;
-    }
+        h5 {
+            margin-left: 1rem;
+        }
 
-    h3 {
-    }
+        .content {
+       
+        }
 
-    h3, h2, p {
+        img {
+            padding: 1rem;
+            margin: auto;
+        }
+
+        h3 {
+        }
+
+        h3, h2, p {
+        }
     }
 }
 
     @include tablet {
-        #great-reviews {
-            padding-block: 3rem;
+        #reviews {
+
+            .container {
 
             .content {
-                width: 90%;
+
+            }
+
+            img {
+           
+            }
+
+            h3 {
+            }
+
+            h3, h2, p {
+             
+            }
+        }
+            }
+
+    }
+
+/*@include desktop {
+    #reviews {
+        padding-block: 3rem;
+
+        .container {
+            .content {
+                width: 64%;
                 margin: auto;
+
             }
 
             img {
                 padding: 3rem;
+                margin-top: 4rem;
+                width: 100%;
             }
 
             h3 {
@@ -161,34 +198,13 @@
             }
         }
     }
-
-@include desktop {
-    #great-reviews {
-        padding-block: 3rem;
-
-        .content {
-            width: 64%;
-            margin: auto;
-            padding-block: 2rem;
-        }
-
-        img {
-            padding: 3rem;
-        }
-
-        h3 {
-        }
-
-        h3, h2, p {
-            padding-left: 2rem;
-        }
-    }
-}
+}*/
 
 @include ultra-wide {
-    #great-reviews {
+    #reviews {
         padding-block: 3rem;
 
+        .container{
         .content {
             margin-top: 7rem;
         }
@@ -204,6 +220,9 @@
             padding-left: 2rem;
         }
     }
+
+        }
+
 }
 
 

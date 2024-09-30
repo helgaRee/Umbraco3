@@ -22,6 +22,7 @@
     var emailIcon = Model.Value<IPublishedContent>("emailIcon")?.Url() ?? "";
 
     var tagList = Model.Value<IEnumerable<string>>("tags") ?? null;
+    var tagTitle = Model.Value<string>("tagTitle") ?? "Tags";
     var border = Model.Value<bool>("withBorder") ? "borderClass" : "";
     var borderRadius = Model.Value<bool>("withBorderRadius") ? "borderRadiusClass" : "";
 }
@@ -41,6 +42,7 @@
     
     @if(tagList != null) {
         <div class="sidebar-tags">
+            <h4>@tagTitle</h4>
                 <ul class="tag-list">
                     @foreach(var tag in tagList) {
                         <li class="tag-item">@tag</li>

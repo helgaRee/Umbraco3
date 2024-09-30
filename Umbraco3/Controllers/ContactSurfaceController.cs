@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Messaging.ServiceBus;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -12,102 +14,140 @@ namespace Umbraco3.Controllers;
 
 public class ContactSurfaceController : SurfaceController
 {
-	public ContactSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
-	{
-	}
+    private readonly ILogger<ContactSurfaceController> _logger;
+
+    public ContactSurfaceController(
+        IUmbracoContextAccessor umbracoContextAccessor,
+        IUmbracoDatabaseFactory databaseFactory,
+        ServiceContext services,
+        AppCaches appCaches,
+        IProfilingLogger profilingLogger,
+        IPublishedUrlProvider publishedUrlProvider,
+        ILogger<ContactSurfaceController> logger) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
+    {
+        _logger = logger; // Injektera loggern
+    }
 
 
 
-	[HttpPost]
-	public IActionResult HandleContactFormSubmit(ContactFormModel form)
-	{
+    [HttpPost]
+    public async Task<IActionResult> HandleContactFormSubmit(ContactFormModel form)
+    {
 
 
-		//om modelstate inte är giltig, gör detta:
-		if (!ModelState.IsValid)
-		{
-			//är modellen ogiltig? sätter temp/view varables och mappar in värden
-			ViewData["name"] = form.Name;
-			ViewData["email"] = form.Email;
-			ViewData["phone"] = form.Phone;
+        //om modelstate inte är giltig, gör detta:
+        if (!ModelState.IsValid)
+        {
+            //är modellen ogiltig? sätter temp/view varables och mappar in värden
+            ViewData["name"] = form.Name;
+            ViewData["email"] = form.Email;
+            ViewData["phone"] = form.Phone;
+            //ViewData["optionsField"] = form.optionsField;
 
 
-			ViewData["error_name"] = string.IsNullOrEmpty(form.Name);
-			ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
-			ViewData["error_phone"] = string.IsNullOrEmpty(form.Phone);
+            ViewData["error_name"] = string.IsNullOrEmpty(form.Name);
+            ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
+            ViewData["error_phone"] = string.IsNullOrEmpty(form.Phone);
+            //ViewData["error_optionsField"] = string.IsNullOrEmpty(form.optionsField);
 
-			ViewData["form_submitted"] = true;
+            ViewData["form_submitted"] = true;
 
-			return CurrentUmbracoPage();
-		}
+            return CurrentUmbracoPage();
+        }
 
-		//annars...
-		//om lyckas, returnera till nuvarande sida, uppdaterar sidan. Redirect...
-		TempData["success"] = "Contactform was submitted successfully.";
-		return RedirectToCurrentUmbracoPage();
-	}
+        //skicka formulärdata till azure service bus om det är giltigt
+        try
+        {
+            //skapa en service bus client
+            string connectionString = "Endpoint=sb://servicebus-umbraco-onatrix.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=fRQGrTZch4h3aYXVGc+pOmgWq4jx5kRKs+ASbMJvNxM=";
+            string queueName = "email_request";
 
+            var client = new ServiceBusClient(connectionString);
+            ServiceBusSender sender = client.CreateSender(queueName);
 
-	[HttpPost]
-	public IActionResult HandleQuestionFormSubmit(QuestionFormModel form)
-	{
+            //serialisera formulärdata till ett json-meddelande
+            string messageBody = JsonConvert.SerializeObject(form);
+            ServiceBusMessage message = new ServiceBusMessage(messageBody);
 
+            //skicka meddelandet till Azure Service bus queue
 
-		if (!ModelState.IsValid)
-		{
-			ViewData["name"] = form.Name;
-			ViewData["email"] = form.Email;
-			ViewData["message"] = form.Message;
-
-			ViewData["error_name"] = string.IsNullOrEmpty(form.Name);
-			ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
-			ViewData["error_message"] = string.IsNullOrEmpty(form.Message);
-
-			ViewData["form_submitted"] = true;
-
-			return CurrentUmbracoPage();
-		}
-
-		TempData["success"] = "Your question was submitted successfully.";
-		return RedirectToCurrentUmbracoPage();
-	}
+            _logger.LogInformation($"Sending message: {messageBody}");
+            await sender.SendMessageAsync(message);
 
 
+            //om lyckas, returnera till nuvarande sida, uppdaterar sidan. Redirect...
+            TempData["success"] = "Contactform was submitted successfully.";
+        }
+        catch (Exception ex)
+        {
+            //hantera ev fel
+            TempData["error"] = $"An error occurred: {ex.Message}";
+        }
+        //anv omdirigeras till aktuell sida
+        return RedirectToCurrentUmbracoPage();
+    }
+
+
+    [HttpPost]
+    public IActionResult HandleQuestionFormSubmit(QuestionFormModel form)
+    {
+
+
+        if (!ModelState.IsValid)
+        {
+            ViewData["name"] = form.Name;
+            ViewData["email"] = form.Email;
+            ViewData["message"] = form.Message;
+
+            ViewData["error_name"] = string.IsNullOrEmpty(form.Name);
+            ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
+            ViewData["error_message"] = string.IsNullOrEmpty(form.Message);
+
+            ViewData["form_submitted"] = true;
+
+            return CurrentUmbracoPage();
+        }
+
+        TempData["success"] = "Your question was submitted successfully.";
+        return RedirectToCurrentUmbracoPage();
+    }
 
 
 
-	[HttpPost]
-	public IActionResult HandleHomePageFormSubmit(HomepageFormModel form)
-	{
-		if (!ModelState.IsValid)
-		{
-			ViewData["name"] = form.Name;
-			ViewData["phone"] = form.Phone;
-			ViewData["email"] = form.Email;
+
+
+    [HttpPost]
+    public IActionResult HandleHomePageFormSubmit(HomepageFormModel form)
+    {
+        if (!ModelState.IsValid)
+        {
+            ViewData["name"] = form.Name;
+            ViewData["phone"] = form.Phone;
+            ViewData["email"] = form.Email;
 
 
 
-			if (string.IsNullOrEmpty(form.Name))
-			{
-				ViewData["error_name"] = ModelState["name"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your name!";
-			}
-			if (string.IsNullOrEmpty(form.Phone))
-			{
-				ViewData["error_phone"] = ModelState["phone"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your number!";
-			}
-			if (string.IsNullOrEmpty(form.Email))
-			{
-				ViewData["error_email"] = ModelState["email"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your Email!";
-			}
+            if (string.IsNullOrEmpty(form.Name))
+            {
+                ViewData["error_name"] = ModelState["name"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your name!";
+            }
+            if (string.IsNullOrEmpty(form.Phone))
+            {
+                ViewData["error_phone"] = ModelState["phone"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your number!";
+            }
+            if (string.IsNullOrEmpty(form.Email))
+            {
+                ViewData["error_email"] = ModelState["email"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "You have to enter your Email!";
+            }
 
 
-			ViewData["form_submitted"] = true;
+            ViewData["form_submitted"] = true;
 
-			return CurrentUmbracoPage();
+            return CurrentUmbracoPage();
 
-		}
+        }
 
-		TempData["success"] = "ContactForm was submitted successfully.";
-		return RedirectToCurrentUmbracoPage();
-	}
+        TempData["success"] = "ContactForm was submitted successfully.";
+        return RedirectToCurrentUmbracoPage();
+    }
 }

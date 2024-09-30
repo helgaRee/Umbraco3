@@ -239,38 +239,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string FormText => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetFormText(this, _publishedValueFallback);
 
 		///<summary>
-		/// Recent Project Headline
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectHeadline")]
-		public virtual string RecentProjectHeadline => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectHeadline(this, _publishedValueFallback);
-
-		///<summary>
-		/// Recent Project Image
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectImage")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops RecentProjectImage => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectImage(this, _publishedValueFallback);
-
-		///<summary>
-		/// Recent Project Published
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectPublished")]
-		public virtual string RecentProjectPublished => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectPublished(this, _publishedValueFallback);
-
-		///<summary>
-		/// Recent Project Subtitle
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectSubtitle")]
-		public virtual string RecentProjectSubtitle => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetRecentProjectSubtitle(this, _publishedValueFallback);
-
-		///<summary>
 		/// Sidebar Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
@@ -301,5 +269,13 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("tagItems")]
 		public virtual global::System.Collections.Generic.IEnumerable<string> TagItems => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetTagItems(this, _publishedValueFallback);
+
+		///<summary>
+		/// Tag Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("tagTitle")]
+		public virtual string TagTitle => global::Umbraco.Cms.Web.Common.PublishedModels.SidebarItem.GetTagTitle(this, _publishedValueFallback);
 	}
 }

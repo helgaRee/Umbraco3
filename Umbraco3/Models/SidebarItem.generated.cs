@@ -42,26 +42,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		string FormText { get; }
 
-		/// <summary>Recent Project Headline</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string RecentProjectHeadline { get; }
-
-		/// <summary>Recent Project Image</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		global::Umbraco.Cms.Core.Models.MediaWithCrops RecentProjectImage { get; }
-
-		/// <summary>Recent Project Published</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string RecentProjectPublished { get; }
-
-		/// <summary>Recent Project Subtitle</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string RecentProjectSubtitle { get; }
-
 		/// <summary>Sidebar Headline</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -81,6 +61,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		global::System.Collections.Generic.IEnumerable<string> TagItems { get; }
+
+		/// <summary>Tag Title</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string TagTitle { get; }
 	}
 
 	/// <summary>Sidebar Item</summary>
@@ -167,58 +152,6 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public static string GetFormText(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "formText");
 
 		///<summary>
-		/// Recent Project Headline
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectHeadline")]
-		public virtual string RecentProjectHeadline => GetRecentProjectHeadline(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Recent Project Headline</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetRecentProjectHeadline(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "recentProjectHeadline");
-
-		///<summary>
-		/// Recent Project Image
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectImage")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops RecentProjectImage => GetRecentProjectImage(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Recent Project Image</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetRecentProjectImage(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "recentProjectImage");
-
-		///<summary>
-		/// Recent Project Published
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectPublished")]
-		public virtual string RecentProjectPublished => GetRecentProjectPublished(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Recent Project Published</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetRecentProjectPublished(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "recentProjectPublished");
-
-		///<summary>
-		/// Recent Project Subtitle
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("recentProjectSubtitle")]
-		public virtual string RecentProjectSubtitle => GetRecentProjectSubtitle(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Recent Project Subtitle</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetRecentProjectSubtitle(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "recentProjectSubtitle");
-
-		///<summary>
 		/// Sidebar Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
@@ -269,5 +202,18 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		public static global::System.Collections.Generic.IEnumerable<string> GetTagItems(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<global::System.Collections.Generic.IEnumerable<string>>(publishedValueFallback, "tagItems");
+
+		///<summary>
+		/// Tag Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("tagTitle")]
+		public virtual string TagTitle => GetTagTitle(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Tag Title</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetTagTitle(ISidebarItem that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "tagTitle");
 	}
 }

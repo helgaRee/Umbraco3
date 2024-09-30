@@ -15,7 +15,7 @@
 
     var multipleChoiceList = Model.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
 
-
+    bool.TryParse(ViewData["error_optionsFiels"]?.ToString()!, out bool error_optionsField);
 
     // Kontrollera om formuläret har skickats
     bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
@@ -39,6 +39,7 @@
     @if (multipleChoiceList.Any())
     {
         <select>
+         <option value="">-- Select an option --</option>
             @foreach (var option in multipleChoiceList)
             {
                 <option value="@option">@option</option>
@@ -49,6 +50,13 @@
     {
         <p>No options available</p>
     }
+
+    <span class="form-input-error @(error_optionsField ? "form-invalid-input" : "")">
+        @if (error_optionsField)
+        {
+            <span class="form-invalid-input">@errorMessage</span>
+        }
+    </span>
 
 </div>
 
