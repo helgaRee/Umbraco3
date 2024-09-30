@@ -10,23 +10,13 @@
 
 	var colorLabel = Model.Content.Value<ColorPickerValueConverter.PickedColor>("sectionBackgroundColor")?.Label.ToLower() ?? null;
 	var backgroundColorClass = !string.IsNullOrEmpty(colorLabel) ? $"bg-{colorLabel}" : "";
+	
 	var selection = Umbraco.Content(Guid.Parse("65b7a274-f827-4dd1-ad48-f2bc92605393"))?
     .ChildrenOfType("serviceItemTemplate")?
     .Where(x => x.IsVisible())
 	.Take(6);
 }
-@*
 
-<ul>
-	@foreach (var item in selection)
-	{
-		<li>
-			<a href="@item.Url()">@item.Name()</a>
-		</li>
-	}
-</ul>
-
-*@
 <section id="our-services" class="our-services @backgroundColorClass">
 @if(!string.IsNullOrEmpty(backgroundColorClass)) 
 {

@@ -1,6 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -15,6 +16,11 @@ namespace Umbraco3.Controllers;
 public class ContactSurfaceController : SurfaceController
 {
     private readonly ILogger<ContactSurfaceController> _logger;
+    private readonly HttpClient _httpClient;
+
+    //private readonly string _serviceBusConnectionString = Environment.GetEnvironmentVariable("ServiceBusConnection");
+
+
 
     public ContactSurfaceController(
         IUmbracoContextAccessor umbracoContextAccessor,
@@ -26,6 +32,28 @@ public class ContactSurfaceController : SurfaceController
         ILogger<ContactSurfaceController> logger) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
     {
         _logger = logger; // Injektera loggern
+        _httpClient = new HttpClient();
+
+    }
+
+
+    private async Task SendEmailToUser(ContactFormModel form)
+    {
+        var emailRequest = new
+        {
+            To = form.Email,
+            Name = form.Name,
+            Phone = form.Phone
+        };
+
+        var content = new StringContent(JsonConvert.SerializeObject(emailRequest), Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync("https://emailprovider-umbraco-onatrix.azurewebsites.net", content);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            _logger.LogError($"Failed to send email: {response.StatusCode}");
+        }
     }
 
 
@@ -70,22 +98,38 @@ public class ContactSurfaceController : SurfaceController
             ServiceBusMessage message = new ServiceBusMessage(messageBody);
 
             //skicka meddelandet till Azure Service bus queue
-
             _logger.LogInformation($"Sending message: {messageBody}");
             await sender.SendMessageAsync(message);
 
 
+
+
             //om lyckas, returnera till nuvarande sida, uppdaterar sidan. Redirect...
             TempData["success"] = "Contactform was submitted successfully.";
+
+            // Skicka bekräftelsemeddelande
+            await SendEmailToUser(form);
+
+            TempData["success"] = "Ett meddelande har skickast till din mail";
+
         }
         catch (Exception ex)
         {
             //hantera ev fel
             TempData["error"] = $"An error occurred: {ex.Message}";
         }
+
+
+
         //anv omdirigeras till aktuell sida
         return RedirectToCurrentUmbracoPage();
     }
+
+
+
+
+
+
 
 
     [HttpPost]

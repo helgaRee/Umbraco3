@@ -8,12 +8,15 @@
 
 
         .page-content {
+
+            img {
+                display: block;
+            }
         }
     }
 }
 
 .project-details-with-sidebar-left {
-    margin-top: 4rem;
     margin-top: 4rem;
 
     .container {
@@ -22,12 +25,13 @@
         gap: 4rem;
 
         @include tablet {
-            display: flex;
-            flex-direction: row-reverse;
         }
 
 
         @include desktop {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 4rem;
         }
 
         .page-content {
@@ -39,174 +43,8 @@
 
         .sidebar-content {
 
-                text-align: center;
-            h3 {
-                color: var(--color-accent);
-
-                @include tablet {
-                    
-                }
-            }
-
-            .projects-content {
-                @include tablet {
-                    text-align: center;
-                }
-
-
-                .recent-project-item {
-                    display: flex;
-                    flex-direction: column;
-                    column-gap: 2rem;
-                    row-gap: 2rem;
-                    justify-content: center;
-                    align-items: center;
-                    margin-bottom: 2rem;
-
-                    @include tablet {
-                        text-align: center;
-                    }
-
-                    @include desktop {
-                        flex-direction: row-reverse;
-                        text-align: left;
-                        row-gap: 1rem;
-                        border-bottom: 1px solid var(--color-border-gray);
-                        padding-bottom: 2rem;
-
-                        &:last-child {
-                            border-bottom: none;
-                        }
-                    }
-
-
-                    .item-img {
-
-                        img {
-                            width: 100%;
-
-                            @include tablet {
-                                width: 60%;
-                            }
-
-                            @include desktop {
-                                width: 100%;
-                            }
-                        }
-                    }
-
-                    .item-content {
-                        text-align: center;
-                        padding-inline: 2rem;
-                        margin: 0 auto;
-
-
-                        @include tablet {
-                            text-align: left;
-                            align-self: baseline;
-                            padding: 0;
-                            margin-left: 10px;
-                        }
-
-                        @include desktop {
-                            padding: 0;
-                            margin-left: 0;
-                            width: max-content;
-                        }
-
-                        h4 {
-                            @include tablet {
-                                text-align: left;
-                            }
-                        }
-
-                        .published {
-                        }
-                    }
-                }
-            }
-
-            .tag-content {
-                .tag-list {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 1rem;
-                    padding-left: 0;
-
-                    h4 {
-                    }
-
-                    .tag-item {
-                        list-style-type: none;
-                        text-align: center;
-                        align-content: center;
-                        list-style-type: none;
-                        border: 1px solid var(--color-border-light);
-                        border-radius: 30px;
-                        padding: 0.3rem;
-                    }
-                }
-            }
-
-            .text-content {
-                background-color: var(--color-primary);
-                padding: 1rem;
-                text-align: center;
-
-                @include tablet {
-                    text-align: left;
-                }
-
-                h4 {
-                    color: var(--color-accent);
-                }
-
-                .support-text {
-                    color: var(--color-accent);
-                }
-            }
-        }
-    }
-}
-
-
-
-.project-details-with-sidebar-right {
-    margin-top: 4rem;
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-
-        @include tablet {
-            display: flex;
-            flex-direction: row;
-            gap: 4rem;
-        }
-
-
-        @include desktop {
-            display: flex;
-            flex-direction: row;
-            gap: 4rem;
-        }
-
-        .page-content {
-            @include desktop {
-                border-right: 1px solid var(--color-border-gray);
-                padding-right: 3rem;
-            }
-        }
-
-        .sidebar-content {
-
             h2 {
                 text-align: center;
-
-                @include tablet {
-                    text-align: left;
-                }
             }
 
             .projects-content {
@@ -223,6 +61,7 @@
                     margin-bottom: 2rem;
 
                     @include tablet {
+                        justify-content: left;
                     }
 
                     @include desktop {
@@ -244,7 +83,6 @@
                             width: 100%;
 
                             @include tablet {
-                                width: 60%;
                             }
 
                             @include desktop {
@@ -285,6 +123,13 @@
             }
 
             .tag-content {
+                width: 60%;
+                margin: auto;
+
+                @include desktop {
+                    width: 100%;
+                }
+
                 .tag-list {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
@@ -306,13 +151,181 @@
                 }
             }
 
-            .text-content {
+            .support-content {
                 background-color: var(--color-primary);
                 padding: 1rem;
                 text-align: center;
+                width: 60%;
+                margin: auto;
 
-                @include tablet {
+                @include desktop {
                     text-align: left;
+                    width: 100%;
+                }
+
+                h4 {
+                    color: var(--color-accent);
+                }
+
+                .support-text {
+                    color: var(--color-accent);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+.project-details-with-sidebar-right {
+    margin-top: 4rem;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+
+        @include tablet {
+        }
+
+
+        @include desktop {
+            display: flex;
+            flex-direction: row;
+            gap: 4rem;
+        }
+
+        .page-content {
+            @include desktop {
+                border-right: 1px solid var(--color-border-gray);
+                padding-right: 3rem;
+            }
+        }
+
+        .sidebar-content {
+
+            h2 {
+                text-align: center;
+
+            }
+
+            .projects-content {
+
+
+
+                .recent-project-item {
+                    display: flex;
+                    flex-direction: column;
+                    column-gap: 2rem;
+                    row-gap: 2rem;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 2rem;
+
+                    @include tablet {
+                        justify-content: left;
+                    }
+
+                    @include desktop {
+                        flex-direction: row;
+                        text-align: left;
+                        row-gap: 1rem;
+                        border-bottom: 1px solid var(--color-border-gray);
+                        padding-bottom: 2rem;
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+                    }
+
+
+                    .item-img {
+
+                        img {
+                            width: 100%;
+
+                            @include tablet {
+                            }
+
+                            @include desktop {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    .item-content {
+                        text-align: center;
+                        padding-inline: 2rem;
+                        margin: 0 auto;
+
+
+                        @include tablet {
+                            text-align: left;
+                            align-self: baseline;
+                            padding: 0;
+                            margin-left: 10px;
+                        }
+
+                        @include desktop {
+                            padding: 0;
+                            margin-left: 0;
+                            width: max-content;
+                        }
+
+                        h4 {
+                            @include tablet {
+                                text-align: left;
+                            }
+                        }
+
+                        .published {
+                        }
+                    }
+                }
+            }
+
+            .tag-content {
+                width: 60%;
+                margin: auto;
+
+                @include desktop {
+                   
+                    width: 100%;
+                }
+
+                .tag-list {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem;
+                    padding-left: 0;
+
+                    h4 {
+                    }
+
+                    .tag-item {
+                        list-style-type: none;
+                        text-align: center;
+                        align-content: center;
+                        list-style-type: none;
+                        border: 1px solid var(--color-border-light);
+                        border-radius: 30px;
+                        padding: 0.3rem;
+                    }
+                }
+            }
+
+            .support-content {
+                background-color: var(--color-primary);
+                padding: 1rem;
+                text-align: center;
+                width: 60%;
+                margin: auto;
+
+                @include desktop {
+                    text-align: left;
+                    width: 100%;
                 }
 
                 h4 {

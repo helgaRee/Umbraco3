@@ -15,7 +15,7 @@ h1 {
     font-size: 40px;
 
     @include tablet {
-        font-size: 60px;
+        
     }
 
     @include ultra-wide {
@@ -27,12 +27,16 @@ h2 {
     font-size: 27px;
 
     @include tablet {
-        font-size: 40px;
+        font-size: 24px;
     }
 }
 
 h3 {
     font-size: 22px;
+
+    @include tablet {
+        font-size: 15px;
+    }
 }
 
 h4 {

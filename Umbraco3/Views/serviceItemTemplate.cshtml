@@ -25,77 +25,22 @@
 		<div class="flex">
 			<div class="page-content">
 				@Model?.Value("pageContent")
-
 			</div>
 			@await Html.PartialAsync("Blockgrid/components/sidebarBox", Model)
-
-
 		</div>
-
 
 			@if(TempData["success"] != null)
 			{
 				<div class="success-message">@TempData["success"]</div>
-
 			}
 			else
 			{
-		
 				@using (Html.BeginUmbracoForm("HandleQuestionFormSubmit", "ContactSurface", FormMethod.Post, new { novalidate = "novalidate"})) 
 				{
 					@Html.GetBlockListHtml(Model?.QuestionForm);
 				}
-			
 			}
-
 	</div>
 </section>
 
 @await Html.GetBlockGridHtmlAsync(Model!.Layout);
-
-
-
-@*  @using (Html.BeginUmbracoForm("HandleQuestionFormSubmit", "ContactSurface", FormMethod.Post))
-
- {
- 	<div class="form-input-group">
- 		<label for="name" class="form-label"></label>
- 		<input id="name" name="name" type="text" placeholder="Enter your name" class="form-input" />
- 		<span class="form-input-error"></span>
- 	</div>
- 	<div class="form-input-group">
- 		<label for="email" class="form-label"></label>
- 		<input id="email" name="email" type="email" placeholder="Enter your email" class="form-input" />
- 		<span class="form-input-error"></span>
- 	</div>
- 	<div class="form-input-group">
- 		<label for="phone" class="form-label"></label>
- 		<input id="phone" name="phone" type="text" placeholder="Enter your number" class="form-input" />
- 		<span class="form-input-error"></span>
- 	</div>
- 	<button type="submit" class="form-button btn btn-primary">Submit</button>
- } *@
-
-@*
-
-<aside class="sidebar-container">
-			<div class="tag-content">
-				@if(tags != null) {
-						<h4>@sidebarHeadline</h4>
-						<h2>@formHeadline</h2>
-					<ul class="tag-list">
-						@foreach(var tag in tags) {
-							<li class="tag-item">@tag</li>
-						}
-					</ul>
-				}
-			</div>
-			<div class="text-content">
-				<h4>@sidebarHeadline</h4>
-				<p class="support-text">
-					
-				</p>
-				<input type="email" placeholder="E-mail Address">
-			</div>
-    </aside>*@
-

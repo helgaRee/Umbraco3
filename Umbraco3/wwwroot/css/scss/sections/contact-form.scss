@@ -1,5 +1,5 @@
 .contact-form {
-/*    margin-top: 29rem;*/
+    /*    margin-top: 29rem;*/
     padding: 3rem;
 
     .container {
@@ -8,10 +8,17 @@
         padding: 3rem;
         background: white;
 
+
+
         @include desktop {
             position: absolute;
-            top: 70rem;
+            top: 68rem;
             left: 15rem;
+        }
+
+        @include ultra-wide {
+            top: 78rem;
+            left: 36rem;
         }
 
         .headline {

@@ -21,12 +21,21 @@
 
 
         .contact-images {
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+
+            @include tablet {
+                -webkit-transform: none;
+                transform: none;
+            }
+
             .img-background {
                 position: relative;
-                bottom: -64px;
+                bottom: 0;
+                //bottom: -64px;
 
                 @include tablet {
-                    bottom: -101px;
+                    bottom: -81px;
                 }
 
                 img {
@@ -40,14 +49,15 @@
 
             .img-front {
                 position: absolute;
-                top: 69%;
+                top: -2.8px;
+                //top: 69%;
 
                 @include tablet {
-                    top: 28.2%;
+                    top: 75px;
                 }
 
                 @include desktop {
-                    top: 7.5%;
+                    top: 119px;
                 }
 
                 img {

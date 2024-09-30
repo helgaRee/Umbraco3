@@ -149,44 +149,19 @@
     }
 }
 
-    @include tablet {
-        #reviews {
-
-            .container {
-
-            .content {
-
-            }
-
-            img {
-           
-            }
-
-            h3 {
-            }
-
-            h3, h2, p {
-             
-            }
-        }
-            }
-
-    }
-
-/*@include desktop {
+@include tablet {
     #reviews {
-        padding-block: 3rem;
+       
 
         .container {
-            .content {
-                width: 64%;
-                margin: auto;
+            h5 {
+                margin-left: 0;
+            }
 
+            .content {
             }
 
             img {
-                padding: 3rem;
-                margin-top: 4rem;
                 width: 100%;
             }
 
@@ -194,11 +169,34 @@
             }
 
             h3, h2, p {
-                padding-left: 2rem;
             }
         }
     }
-}*/
+}
+
+@include desktop {
+    #reviews {
+        text-align: left;
+
+        .container {
+            h5 {
+                margin-left: 0;
+            }
+
+            .content {
+            }
+
+            img {
+            }
+
+            h3 {
+            }
+
+            h3, h2, p {
+            }
+        }
+    }
+}
 
 @include ultra-wide {
     #reviews {
