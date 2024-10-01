@@ -132,14 +132,8 @@ public class ContactSurfaceController : SurfaceController
 	}
 
 
-
-
-
-
-
-
 	[HttpPost]
-	public IActionResult HandleQuestionFormSubmit(QuestionFormModel form)
+	public async Task<IActionResult> HandleQuestionFormSubmit(QuestionFormModel form)
 	{
 
 
@@ -153,21 +147,50 @@ public class ContactSurfaceController : SurfaceController
 			ViewData["error_email"] = string.IsNullOrEmpty(form.Email);
 			ViewData["error_message"] = string.IsNullOrEmpty(form.Message);
 
+			//markera att formuläret har skickats in (validerat)
 			ViewData["form_submitted"] = true;
-
+			//skickar åter anv till aktuell sida
 			return CurrentUmbracoPage();
 		}
 
-		TempData["success"] = "Your question was submitted successfully.";
+		//skicka formulärdata till azure service bus om det är giltigt
+		try
+		{
+			//skapa en service bus client, för att skicka formulär-data som ett JSON-meddealnde till min service bus-kö email_request
+			string connectionString = "Endpoint=sb://servicebus-umbraco-onatrix.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=fRQGrTZch4h3aYXVGc+pOmgWq4jx5kRKs+ASbMJvNxM=";
+			string queueName = "email_request";
+			var client = new ServiceBusClient(connectionString);
+			ServiceBusSender sender = client.CreateSender(queueName);
+
+			//Serialisera formulärdatan till ett JSON-meddelande
+			string formInputBody = JsonConvert.SerializeObject(form);
+			//instansiera JSON-meddelandet för att skicka till service Bus-kön
+			ServiceBusMessage message = new ServiceBusMessage(formInputBody);
+
+			_logger.LogInformation($"Sending message: {formInputBody}");
+
+			//skicka meddelandet till service bus-kön
+			await sender.SendMessageAsync(message);
+
+			//om det skickas iväg, sätt ett success-meddelande
+			TempData["success"] = "Your question is sent! We will answer you shortly.";
+
+			//skicka bekräftelsemeddelande till användaren.
+			//await SendEmailToUser(form);
+		}
+
+		catch (Exception ex)
+		{
+			TempData["error"] = $"An error occurred: {ex.Message}";
+		}
+		TempData["success"] = "Your question is sent! We will answer you shortly.";
 		return RedirectToCurrentUmbracoPage();
+
 	}
 
 
-
-
-
 	[HttpPost]
-	public IActionResult HandleHomePageFormSubmit(HomepageFormModel form)
+	public async Task<IActionResult> HandleHomePageFormSubmit(ContactFormModel form)
 	{
 		if (!ModelState.IsValid)
 		{
@@ -197,7 +220,41 @@ public class ContactSurfaceController : SurfaceController
 
 		}
 
-		TempData["success"] = "ContactForm was submitted successfully.";
+		//skicka formulärdata till azure service bus om det är giltigt
+		try
+		{
+			//skapa en service Bus-client (för att skicka formulärdata som ett JSON-med. till min azure service bus kö)
+			string connectionString = "Endpoint=sb://servicebus-umbraco-onatrix.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=fRQGrTZch4h3aYXVGc+pOmgWq4jx5kRKs+ASbMJvNxM=";
+			string queueName = "email_request";
+			var client = new ServiceBusClient(connectionString);
+			ServiceBusSender sender = client.CreateSender(queueName);
+
+			//serialisera formulärdata till ett JSON-meddelande
+			string messageBody = JsonConvert.SerializeObject(form);
+			ServiceBusMessage message = new ServiceBusMessage(messageBody);
+
+			_logger.LogInformation($"Sending message: {messageBody}");
+
+			//skicka meddelandet till Azure Service Bus-queue
+			await sender.SendMessageAsync(message);
+
+
+			//om inskickning lyckas, sätt ett success-meddelande
+			TempData["success"] = "Contactform was submitted successfully. We've sent you an email.";
+
+			// Skicka bekräftelsemeddelande/epost till användaren (anropar metoden ovan)
+			await SendEmailToUser(form);
+
+		}
+		catch (Exception ex)
+		{
+			//hantera ev fel
+			TempData["error"] = $"An error occurred: {ex.Message}";
+		}
+
+
+
+		//anv omdirigeras till aktuell sida
 		return RedirectToCurrentUmbracoPage();
 	}
 }

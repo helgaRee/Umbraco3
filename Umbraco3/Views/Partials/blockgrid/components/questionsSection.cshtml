@@ -1,0 +1,32 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco3.FormModels
+
+@{
+    var formModel = new QuestionFormModel(); 
+ 
+
+	var selection = Umbraco.Content(Guid.Parse("b021b6ea-0693-4b01-af67-160dfab3d7b1"))!
+    .ChildrenOfType("questionItem")!
+    .Where(x => x.IsVisible());
+}
+
+<h1>Give us a review</h1>
+
+
+
+<section class="questions">
+    <div class="container">
+
+        @foreach(var item in selection) {
+            var author = item.Value("authorName");
+            var text = item.Value("questionText");
+
+            <div class="testimonial">
+                <div class="quote">@text</div>
+                <div class="author">@author</div>
+            </div>
+        }
+    </div>
+</section>

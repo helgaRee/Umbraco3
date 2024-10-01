@@ -3,6 +3,7 @@
 
 @{
     var uniqueName = Model.Content.Value<string>("uniqueName") ?? "";
+    var inputType = Model.Content.Value<IEnumerable<string>>("inputType");
     var label = Model.Content.Value<string>("labelText") ?? "";
     var hideLabel = Model.Content.Value<bool>("hideLabel");
     var placeholder = Model.Content.Value<string>("placeholderText") ?? "";
@@ -23,7 +24,7 @@
         <label for="@uniqueName"></label>
 
     }
-    <input type="@uniqueName" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["phone"]">
+    <input type="@inputType" id="@uniqueName" name="@uniqueName" placeholder="@placeholder" required="@isRequired" value="@ViewData["phone"]">
     
 
     <span class="form-input-error @(error_phone ? "form-invalid-input" : "")">
