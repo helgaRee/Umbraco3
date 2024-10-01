@@ -15,7 +15,7 @@
 
     var multipleChoiceList = Model.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
 
-    bool.TryParse(ViewData["error_optionsFiels"]?.ToString()!, out bool error_optionsField);
+    bool.TryParse(ViewData["error_optionsField"]?.ToString()!, out bool error_optionsField);
 
     // Kontrollera om formuläret har skickats
     bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
@@ -38,7 +38,7 @@
     }
     @if (multipleChoiceList.Any())
     {
-        <select>
+        <select name="optionsField"> 
          <option value="">-- Select an option --</option>
             @foreach (var option in multipleChoiceList)
             {

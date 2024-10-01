@@ -3,6 +3,7 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 @{
+
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model.Value("pageTitle") ?? "";
 
@@ -26,6 +27,10 @@
 	bool.TryParse(ViewData["error_phone"]?.ToString()!, out bool error_phone);
 
 	bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+
+	bool.TryParse(ViewData["error_optionsField"]?.ToString()!, out bool error_optionsField);
+
+
 
 	bool formSubmitted = TempData["form_submitted"] != null && (bool)TempData["form_submitted"]!;
 }
