@@ -8,6 +8,7 @@
 
 
         .page-content {
+            margin-bottom: 3rem;
 
             img {
                 display: block;
@@ -43,8 +44,12 @@
 
         .sidebar-content {
 
-            h2 {
+            h3 {
                 text-align: center;
+
+                @include desktop {
+                    text-align: left;
+                }
             }
 
             .projects-content {
@@ -182,6 +187,14 @@
 .project-details-with-sidebar-right {
     margin-top: 4rem;
 
+    h3 {
+        text-align: center;
+
+        @include desktop {
+            text-align: left;
+        }
+    }
+
     .container {
         display: flex;
         flex-direction: column;
@@ -208,7 +221,6 @@
 
             h2 {
                 text-align: center;
-
             }
 
             .projects-content {
@@ -291,7 +303,6 @@
                 margin: auto;
 
                 @include desktop {
-                   
                     width: 100%;
                 }
 

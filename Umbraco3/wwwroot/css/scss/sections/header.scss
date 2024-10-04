@@ -35,8 +35,17 @@ header {
 
                     a {
                         border-left: 1px solid var(--color-primary-light);
-                        border-right: 1px solid var(--color-primary-light);
                         padding-inline: 0.6rem;
+                        color: var(--color-gray);
+
+                        &:last-child {
+                            border-right: 1px solid var(--color-primary-light);
+                        }
+
+                        &:hover{
+                            color: var(--color-secondary);
+
+                        }
                     }
                 }
             }
@@ -79,6 +88,7 @@ header {
                 display: none;
 
 
+
                 @include tablet {
                     display: flex;
                 }
@@ -88,6 +98,13 @@ header {
                 }
 
                 a {
+                    color: var(--color-primary);
+                    font-weight: 700;
+
+                    &:hover {
+                        color: var(--color-secondary);
+                        text-decoration: none;
+                    }
                 }
             }
 
@@ -112,33 +129,6 @@ header {
         }
     }
 }
-
-
-            /* 
-            @include tablet {
-                .container {
-
-                    .navbar {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        padding: 15px 0;
-
-                        .logo {}
-
-                        .menu-bar {
-                            display: none;
-                        }
-
-                        .navbar-list {
-
-
-                            .navlink {}
-                        }
-
-                    }
-                }
-            } */
 
 
 

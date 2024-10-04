@@ -13,11 +13,8 @@
     var supportText = Model.Value<string>("supportText") ?? "";
     var inputEmail = Model.Value<string>("inputEmail");
 
- 
-
     var backgroundColorLabel = Model.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label.ToLower() ?? null;
     var backgroundColorClass = (!string.IsNullOrEmpty(backgroundColorLabel) && backgroundColorLabel != "none") ? $"bg-{backgroundColorLabel}" : "";
-    
 
     var emailIcon = Model.Value<IPublishedContent>("emailIcon")?.Url() ?? "";
 

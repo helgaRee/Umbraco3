@@ -50,12 +50,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Name
+		/// Author
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("authorName")]
-		public virtual string AuthorName => this.Value<string>(_publishedValueFallback, "authorName");
+		[ImplementPropertyType("questionAuthor")]
+		public virtual string QuestionAuthor => this.Value<string>(_publishedValueFallback, "questionAuthor");
 
 		///<summary>
 		/// Email
@@ -66,7 +66,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string QuestionEmail => this.Value<string>(_publishedValueFallback, "questionEmail");
 
 		///<summary>
-		/// Message
+		/// Question
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]

@@ -4,15 +4,16 @@
 @using Umbraco3.FormModels
 
 @{
-    var formModel = new QuestionFormModel(); 
- 
+    var formModel = new QuestionFormModel();
+    var formTitle = Model.Content.Value<string>("formTitle");
+
 
 	var selection = Umbraco.Content(Guid.Parse("b021b6ea-0693-4b01-af67-160dfab3d7b1"))!
     .ChildrenOfType("questionItem")!
     .Where(x => x.IsVisible());
 }
 
-<h1>Give us a review</h1>
+<h4>@formTitle</h4>
 
 
 
@@ -20,11 +21,12 @@
     <div class="container">
 
         @foreach(var item in selection) {
-            var author = item.Value("authorName");
-            var text = item.Value("questionText");
+            var author = item.Value("questionAuthor");
+            var question = item.Value("questionText");
+            var email = item.Value("questionEmail");
 
-            <div class="testimonial">
-                <div class="quote">@text</div>
+            <div class="question">
+                <div class="question-input">@question</div>
                 <div class="author">@author</div>
             </div>
         }

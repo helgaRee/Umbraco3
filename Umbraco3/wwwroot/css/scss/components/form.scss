@@ -1,0 +1,41 @@
+﻿.form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+
+
+    .form-input-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+        }
+
+        input {
+            padding: 0.8rem;
+            border: 1px solid var(--color-border-light);
+            color: var (--color-primary);
+            font-style: italic;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        .form-input-error {
+            color: red;
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+    }
+
+
+    .form-button {
+        grid-column: 1 / span 2;
+        justify-self: center;
+        margin-top: 1rem;
+        color: var(--color-accent);
+        border: none;
+    }
+}

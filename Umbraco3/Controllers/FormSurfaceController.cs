@@ -30,7 +30,7 @@ public class FormSurfaceController(IUmbracoContextAccessor umbracoContextAccesso
         //bygg upp item
         var questionItem = contentService.Create(Guid.NewGuid().ToString(), nodeId, "questionItem");
         //mappa
-        questionItem.SetValue("authorName", form.Name);
+        questionItem.SetValue("questionAuthor", form.Name);
         questionItem.SetValue("questionEmail", form.Email);
         questionItem.SetValue("questionText", form.Message);
 

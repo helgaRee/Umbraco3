@@ -4,19 +4,6 @@
 
 
 @{
-
-	@*
-    var uniqueName = Model.Content.Value<string>("uniqueName") ?? "";
-    var label = Model.Content.Value<string>("labelText") ?? "";
-    var hideLabel = Model.Content.Value<bool>("hideLabel");
-    var placeholder = Model.Content.Value("placeholderText") ?? "";
-    var type = Model.Content.Value<IEnumerable<string>>("inputType");
-	var multipleChoiceList = Model.Content.Value<IEnumerable<string>>("multipleChoiceList") ?? Enumerable.Empty<string>();
-
-*@
-
-
-
 	var formInputs = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("formHomePage");
 	var errorMessage = Model.Content.Value<string>("errorMessage");
 	var buttonText = Model.Content.Value<string>("buttonText") ?? "Submit";
@@ -63,7 +50,6 @@ else
 				{
 					<label for="@uniqueName">@label</label>
 				}
-
 				@if (multipleChoiceList.Any())
 				{
 					<select id="@uniqueName" name="@uniqueName" required="@isRequired">
@@ -82,14 +68,8 @@ else
 
 				@if (!string.IsNullOrEmpty(ViewData[$"error_{uniqueName}"]?.ToString()))
 				{
-				<span class="form-input-error form-invalid-input">@ViewData[$"error_{uniqueName}"]</span>
+					<span class="form-input-error form-invalid-input">@ViewData[$"error_{uniqueName}"]</span>
 				}
-
-
-
-
-
-				
 			</div>
 		}
 		<button type="submit" class="form-button btn btn-primary">@buttonText</button>

@@ -35,10 +35,10 @@
     <div class="container">
 		<div class="sidebar-right">
 			<div class="tag-content">
-				@if(keywords.Any()) {
+				@if(keywords!.Any()) {
 						<h4>@asideTitle</h4>
 					<ul class="tag-list">
-						@foreach(var tag in keywords) {
+						@foreach(var tag in keywords!) {
 							<li class="tag-item">@tag</li>
 						}
 					</ul>
@@ -56,7 +56,7 @@
 			@if(pagedItems != null) 
 			{
 				@foreach(var item in pagedItems) {
-					var image = item.Value<IPublishedContent>("projectThumbnailImage").Url() ?? "";
+					var image = item.Value<IPublishedContent>("projectThumbnailImage")!.Url() ?? "";
 					var preamble = item.Value<string>("projectPreamble") ?? "";
 					var headline = item.Value<string>("projectTitle") ?? "";
 					var published = item.Value<string>("projectPublished") ?? "";

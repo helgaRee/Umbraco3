@@ -4,7 +4,7 @@
 
 @{
     var quotationContent = Model?.Content.Value<string>("quotationContent");
-        var blockquote = Model.Content.Value<string>("blockquote");
+        var blockquote = Model?.Content.Value<string>("blockquote");
 }
 
 @if(!string.IsNullOrEmpty(quotationContent)) 
